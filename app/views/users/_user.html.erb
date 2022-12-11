@@ -24,4 +24,11 @@
     <%= user.password %>
   </p>
 
+  <%if user_signed_in?%>
+    <p>
+      <strong>Id:</strong>
+      <%= current_user.id %>
+    </p>
+  <%end%>
+
 </div>

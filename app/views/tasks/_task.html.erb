@@ -6,5 +6,9 @@
   <br/>
   <strong>Due:</strong>
   <%= task.due %>
+  <% if user_signed_in?%>
+    <strong>User id:</strong>
+    <%= task.user_id %>
+  <%end%>
 
 </div>
