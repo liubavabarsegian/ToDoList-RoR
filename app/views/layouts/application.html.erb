@@ -44,7 +44,7 @@
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                       <li><%=link_to "My account", "/users/#{session[:user_id]}", class: "dropdown-item btn", type: "button"%></li>
                       <li><hr class="dropdown-divider"></li>
-                      <li><%= button_to "Log out", '/', method: :delete, class: "dropdown-item btn btn-lg"%></li>
+                      <li><%= button_to "Log out", session_path, method: :delete, class: "dropdown-item btn btn-lg"%></li>
                     </ul>
                   </li>
                   <%else%>

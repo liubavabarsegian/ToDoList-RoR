@@ -15,10 +15,10 @@ class SessionsController < ApplicationController
         session[:user_id] = @user.id
         session[:user_nick] = @user.nick
         flash[:success] = 'you have successfully logged in'
-        redirect_to form_path
+        redirect_to root_path
       else
         flash[:error] = 'Incorrect password or email'
-        redirect_to root_path
+        redirect_to login_path
       end
     end
     # rubocop:enable Metrics/MethodLength, Metrics/AbcSize
