@@ -1,16 +1,77 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Todolist</title>
+    <title>ToDoList</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
-  </head>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-uWxY/CJNBR+1zjPWmfnSnVxwRheevXITnMqoEIeG1LJrdI0GlVs/9cVSyPYXdcSF" crossorigin="anonymous">
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-kQtW33rZJAHjgefvhyyzcGF3C5TFyBQBA13V1RKPf4uH+bwyzQxZ6CmMZHmNBEfJ" crossorigin="anonymous"></script>
+</head>
 
   <body>
+    <header>
+      <nav class="navbar navbar-expand-xl navbar-dark bg-dark">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="/">ToDo</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+          <ul class="navbar-nav">
+            
+            <li class="nav-item">
+              <a class="nav-link" href="#">Smth</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Calendar</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">MyFriends</a>
+            </li>
+          </ul> 
+          <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav mr-auto">
+                <%if user_signed_in?%>
+                  <li class="nav-item dropdown mr-auto">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      <%= session[:user_nick]%>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                      <li><%=link_to "My account", "/users/#{session[:user_id]}", class: "dropdown-item btn", type: "button"%></li>
+                      <li><hr class="dropdown-divider"></li>
+                      <li><%= button_to "Log out", '/', method: :delete, class: "dropdown-item btn btn-lg"%></li>
+                    </ul>
+                  </li>
+                  <%else%>
+                    <li class="nav-item">
+                      <a class="nav-link" href="/">Log In</a></i>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="new">Sign Up</a></i>
+                    </li>
+                <%end%>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </nav>
+    </header>
+    <div id="flash">
+      <% flash.each do |type, msg| %>
+        <%if type == "error"%>
+          <%type = "danger"%>
+        <%end%>
+        <div class='alert alert-<%= type%>'>
+          <%= msg %>
+        </div>
+      <% flash.clear %>
+      <% end %>
+    </div>
     <%= yield %>
   </body>
 </html>
