@@ -17,7 +17,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_11_150810) do
     t.date "due"
     t.boolean "reminder"
     t.time "reminder_time"
-    t.boolean "completed"
+    t.boolean "completed", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id"

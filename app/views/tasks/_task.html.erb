@@ -1,6 +1,6 @@
 <div id="<%= dom_id task %>" class="task">
 
-  <input class="form-check-input" type="checkbox">
+  <input class="form-check-input" type="checkbox" onchange="change_task_status()" id="<%= dom_id task %>_checkbox">
   <strong>Title:</strong>
   <%= task.title %>
   <br/>
@@ -10,5 +10,9 @@
     <strong>User id:</strong>
     <%= task.user_id %>
   <%end%>
-
+  <strong>Completed:</strong>
+  <%= task.completed %>
+  <p>
+    <%= link_to "Show this task", task, class: 'link' %>
+  </p>
 </div>
