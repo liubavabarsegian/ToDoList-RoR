@@ -1,11 +1,6 @@
+
+<div  class = "user-show">
 <p style="color: green"><%= notice %></p>
 
 <%= render @user %>
-
-<div>
-  <div style="display:flex;">
-    <%= link_to "Edit this user", edit_user_path(@user), class:'btn btn-primary' %> |
-    <%= button_to "Destroy this user", @user, method: :delete, class: 'btn btn-danger' %>    
-    </div>
-    <%= link_to "Back to users", users_path, type: 'button', class: 'btn btn-secondary' %>
 </div>

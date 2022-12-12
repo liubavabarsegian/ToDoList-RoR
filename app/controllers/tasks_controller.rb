@@ -4,7 +4,10 @@ class TasksController < ApplicationController
   # GET /tasks or /tasks.json
   def index
     @tasks = Task.all
+    if user_signed_in?
+      @pending_tasks = Task.where(user_id: current_user.id).count
     end
+  end
 
   # GET /tasks/1 or /tasks/1.json
   def show

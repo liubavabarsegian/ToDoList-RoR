@@ -1,0 +1,16 @@
+<%=link_to "Week Calendar", week_path, type: "button", class: 'btn btn-primary'%>
+<%= month_calendar(events: @tasks) do |date, tasks| %>
+  <%= date %>
+
+  <% tasks.each do |tasks| %>
+    <% if tasks.completed %>
+      <div style="text-decoration: line-through">
+        <%= tasks.title %>
+      </div>
+    <%else%>
+      <div>
+        <%= tasks.title %>
+      </div>
+    <%end%>
+  <% end %>
+<% end %>

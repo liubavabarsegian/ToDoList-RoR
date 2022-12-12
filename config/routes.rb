@@ -10,7 +10,9 @@ Rails.application.routes.draw do
   get 'login', to: 'sessions#new'
   get 'new', to: 'users#new'
   get '/users/:user_id', to: 'users#show'
-  get 'calendar', to: 'calendars#show'
+
+  get 'month', to: 'calendars#month'
+  get 'week', to: 'calendars#week'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")

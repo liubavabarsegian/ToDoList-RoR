@@ -1,0 +1,10 @@
+<%=link_to "Month Calendar", month_path, type: "button", class: 'btn btn-primary'%>
+<%= week_calendar(events: @tasks) do |date, tasks| %>
+  <%= date %>
+
+  <% tasks.each do |tasks| %>
+    <div>
+      <%= tasks.title %>
+    </div>
+  <% end %>
+<% end %>

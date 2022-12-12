@@ -24,7 +24,7 @@
 
   <div>
     <%= form.label :due, style: "display: block" %>
-    <%= form.date_field :due, id: "due-input" %>
+    <%= form.date_field :due, id: "due-input", class: 'input-group date' %>
   </div>
 
   <div>
@@ -46,3 +46,7 @@
     <%= form.submit "Save Task", class: "btn btn-success btn-lg" %>
   </div>
 <% end %>
+
+
+
+
