@@ -4,3 +4,4 @@
 //= link_tree ../../../vendor/javascript .js
 //= require activestorage
 //= link task.js
+//= require bootstrap-datepicker

@@ -4,7 +4,7 @@ class TasksController < ApplicationController
   # GET /tasks or /tasks.json
   def index
     @tasks = Task.all
-  end
+    end
 
   # GET /tasks/1 or /tasks/1.json
   def show
@@ -60,12 +60,17 @@ class TasksController < ApplicationController
     end
   end
 
-  def completed
+  def mark_completed
     @task.update_attribute(:completed, true)
   end
 
-  def not_completed
+  def mark_not_completed
     @task.update_attribute(:completed, false)
+  end
+
+  def completed_tasks
+    @task.update_attribute(:completed, true)
+    @tasks = Task.where(completed: true)
   end
 
   private

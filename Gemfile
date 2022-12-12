@@ -79,4 +79,5 @@ end
 gem 'addressable'
 gem 'bcrypt'
 gem "simple_calendar", "~> 2.4"
+gem  'bootstrap-datepicker-rails'
 gem 'sass-rails'

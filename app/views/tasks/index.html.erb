@@ -2,11 +2,61 @@
   <p style="color: green"><%= notice %></p>
 
   <h1>Tasks</h1>
+<div class="block" data-controller="tasks">
+<% @tasks.all.order('created_at DESC').each do |task| %>
+  <%= form_with(model: task, class:"text-lg inline-block my-3 w-72") do |form| %>
+    <%= form.check_box :completed,
+                       class: "mr-2 align-middle bg-gray-50 border-gray-300 focus:ring-3 focus:ring-blue-300 h-5 w-5 rounded checked:bg-green-500" %>
+    <%= task.title %>
+  <% end %>
+<% end%>
+</div>
+
+
   <%= link_to "New task", new_task_path, type:"button", id: "btn-add", class: "btn btn-lg btn-primary" %>
   <div id="tasks">
-    <% @tasks.each do |task| %>
+    <% @tasks.all.order('created_at DESC').each do |task| %>
       <% if current_user.id == task.user_id && task.completed == false%>
-        <%= render task %>
+        <div id="<%= dom_id task %>" class="task">
+
+        <input class="form-check-input" type="checkbox" onchange="change_task_status()" id="<%= dom_id task %>_checkbox">
+        <%= check_box_tag 'completed', '1', task.completed %>
+        <strong>Title:</strong>
+        <%= task.title %>
+        <br/>
+        <strong>Due:</strong>
+        <%= task.due %>
+        <% if user_signed_in?%>
+          <strong>User id:</strong>
+          <%= task.user_id %>
+        <%end%>
+        <strong>Completed:</strong>
+        <%= task.completed %>
+        <p>
+          <%= link_to "Show this task", task, class: 'link' %>
+        </p>
+      </div>
+
+      <%end%>  
+    <% end %>
+  </div>
+
+  <h1>Completed tasks</h1>
+  <div id="completed-tasks">
+    <% @tasks.each do |task| %>
+      <% if current_user.id == task.user_id && task.completed == true%>
+        <div id="<%= dom_id task %>" class="task">
+        <input class="form-check-input" type="checkbox" onchange="change_task_status()" id="<%= dom_id task %>_checkbox">
+        <strong>Title:</strong>
+        <%= task.title %>
+        <br/>
+        <strong>Completed:</strong>
+        <%= task.completed %>
+        <p>
+          <%= link_to "Show this task", task, class: 'link' %>
+        </p>
+      </div>
+
       <%end%>  
     <% end %>
   </div>

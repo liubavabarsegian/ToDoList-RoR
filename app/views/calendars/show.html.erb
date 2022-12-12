@@ -1,3 +1,9 @@
-<%= month_calendar(attribute: :starts_at) do |date| %>
+<%= month_calendar(events: @tasks) do |date, tasks| %>
   <%= date %>
+
+  <% tasks.each do |tasks| %>
+    <div>
+      <%= tasks.title %>
+    </div>
+  <% end %>
 <% end %>
