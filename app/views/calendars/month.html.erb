@@ -3,6 +3,7 @@
   <%= date %>
 
   <% tasks.each do |tasks| %>
+  <%if tasks.user_id == current_user.id%>
     <% if tasks.completed %>
       <div style="text-decoration: line-through">
         <%= tasks.title %>
@@ -13,4 +14,5 @@
       </div>
     <%end%>
   <% end %>
+  <%end%>
 <% end %>

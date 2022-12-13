@@ -2,6 +2,3 @@
 //= link_directory ../stylesheets .css
 //= link_tree ../../javascript .js
 //= link_tree ../../../vendor/javascript .js
-//= require activestorage
-//= link task.js
-//= require bootstrap-datepicker

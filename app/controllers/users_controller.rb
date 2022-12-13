@@ -3,11 +3,21 @@ class UsersController < ApplicationController
 
   # GET /users or /users.json
   def index
+    if !user_signed_in?
+      redirect_to login_path
+    end
     @users = User.all
   end
 
   # GET /users/1 or /users/1.json
   def show
+    if !user_signed_in?
+      redirect_to login_path
+    end
+    if user_signed_in?
+      @pending_tasks = Task.where(user_id: current_user.id, completed: false).count
+      @completed_tasks = Task.where(user_id: current_user.id, completed: true).count
+    end
   end
 
   # GET /users/new

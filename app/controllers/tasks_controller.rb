@@ -3,6 +3,9 @@ class TasksController < ApplicationController
 
   # GET /tasks or /tasks.json
   def index
+    if !user_signed_in?
+      redirect_to login_path
+    end
     @tasks = Task.all
     if user_signed_in?
       @pending_tasks = Task.where(user_id: current_user.id).count
@@ -15,6 +18,9 @@ class TasksController < ApplicationController
 
   # GET /tasks/new
   def new
+    if !user_signed_in?
+      redirect_to login_path
+    end
     @task = Task.new
   end
 
@@ -24,6 +30,10 @@ class TasksController < ApplicationController
 
   # POST /tasks or /tasks.json
   def create
+    if !user_signed_in?
+      redirect_to login_path
+    end
+
     if user_signed_in?
       @task = Task.new(task_params)
       @task.user_id = current_user.id
@@ -63,12 +73,17 @@ class TasksController < ApplicationController
     end
   end
 
-  def mark_completed
+  def complete
+    @task = Task.find(params[:task])
     @task.update_attribute(:completed, true)
+    puts DateTime.now
+    @task.update_attribute(:completed_time, DateTime.now)
   end
 
-  def mark_not_completed
+  def uncomplete
+    @task = Task.find(params[:task])
     @task.update_attribute(:completed, false)
+    @task.update_attribute(:completed_time, nil)
   end
 
   def completed_tasks

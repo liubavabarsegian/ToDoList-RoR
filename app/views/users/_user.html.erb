@@ -34,7 +34,16 @@
       <%= user.password %>
     </p>
 
-    <%=@pending_tasks%>
+    <p>
+      <strong>Pending tasks:</strong>
+      <%=@pending_tasks%>
+    </p>
+    
+    <p>
+      <strong>Completed tasks:</strong>
+      <%=@completed_tasks%>
+    </p>
+    
     
   <%else%>
       <p>
