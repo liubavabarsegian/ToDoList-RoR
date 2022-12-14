@@ -10,6 +10,7 @@
       <%= user.id %>
     </p>
     <p>
+  <%end%>
       <strong>Nick:</strong>
       <%= user.nick %>
     </p>
@@ -24,6 +25,7 @@
       <%= user.surname %>
     </p>
 
+    <% if user_signed_in? && current_user.id == user.id%>
     <p>
       <strong>Email:</strong>
       <%= user.email %>
@@ -33,35 +35,16 @@
       <strong>Password:</strong>
       <%= user.password %>
     </p>
-
+    <%end%>
     <p>
       <strong>Pending tasks:</strong>
-      <%=@pending_tasks%>
+      <%=@pending_tasks.count%>
     </p>
     
     <p>
       <strong>Completed tasks:</strong>
-      <%=@completed_tasks%>
-    </p>
-    
-    
-  <%else%>
-      <p>
-      <strong>Nick:</strong>
-      <%= user.nick %>
+      <%=@completed_tasks.count%>
     </p>
 
-    <p>
-      <strong>Name:</strong>
-      <%= user.name %>
-    </p>
-
-    <p>
-      <strong>Surname:</strong>
-      <%= user.surname %>
-    </p>
-
-    
-
-  <%end%>
+    <%= column_chart @completed_tasks.group_by_day(:completed_time).count, style: "background-color:pink;" %>
 </div>

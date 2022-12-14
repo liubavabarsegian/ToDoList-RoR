@@ -1,3 +1,5 @@
+require 'histogram/array' 
+
 class UsersController < ApplicationController
   before_action :set_user, only: %i[ show edit update destroy ]
 
@@ -7,6 +9,7 @@ class UsersController < ApplicationController
       redirect_to login_path
     end
     @users = User.all
+    
   end
 
   # GET /users/1 or /users/1.json
@@ -15,8 +18,8 @@ class UsersController < ApplicationController
       redirect_to login_path
     end
     if user_signed_in?
-      @pending_tasks = Task.where(user_id: current_user.id, completed: false).count
-      @completed_tasks = Task.where(user_id: current_user.id, completed: true).count
+      @pending_tasks = Task.where(user_id: current_user.id, completed: false)
+      @completed_tasks = Task.where(user_id: current_user.id, completed: true)
     end
   end
 
