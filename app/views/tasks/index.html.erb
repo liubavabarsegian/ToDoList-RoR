@@ -3,46 +3,103 @@
   
   <div id="tasks">
     <h1>Pending tasks</h1>
-    <%= link_to "New task", new_task_path, data: { turbo_frame: "bruh" }, type:"button", id: "btn-add", class: "btn btn-lg btn-primary" %>
-    
+    <%= link_to "New task", new_task_path, data: { turbo_frame: "bruh" }, type:"button", id: "btn-add", class: "btn glow-on-hover", style:'color:white;font-size:25px' %>
+    <br/>
+    <% if @tasks.where(completed: false, user_id: current_user.id).count.zero?%>
+          <p style="font-size:20px;text-align:center">All tasks are completed! Congratulations!</p>
+          <img src = "<%= image_path('completed.jpg') %>" alt= "completed_image" style="width:25%;margin-left:37%">
+    <%end%>
+
     <% @tasks.all.order('created_at DESC').each do |task| %>
       <% if current_user.id == task.user_id && task.completed == false%>
         <div id="<%= dom_id task %>" class="task">
 
-        <%=button_to " ", refresh_path(:task => task), remote: true, method: :post, style: "height:20px;width:20px;border-radius:20px;" %>
-        <strong>Title:</strong>
-        <%= task.title %>
-        <br/>
-        <strong>Due:</strong>
-        <%= task.due %>
+        <%=button_to " ", refresh_path(:task => task), format: :turbo_stream, style: "height:25px;width:25px;border-radius:20px;" %> 
         <p>
-          <%= link_to "Show this task", task, class: 'link' %>
+          <%= task.title %>
         </p>
+
         <div class="box">
-          <a class="button" href="#popup2">ShowTask</a>
+          <a class="button"  href="#popup<%= dom_id task %>">ShowTask</a>
         </div>
-      </div>
+
+        <div id = "popup<%= dom_id task %>" class="overlay">
+          <div class="popup">
+          <a class="close" href="#">&times;</a>
+            <div class= "content">
+              <strong>Title:</strong>
+                <%= task.title %>
+                <br/>
+                <strong>Due:</strong>
+                <%= task.due %>
+                <% if user_signed_in?%>
+                  <strong>User id:</strong>
+                  <%= task.user_id %>
+                <%end%>
+                <strong>Completed:</strong>
+                <%= task.completed %>
+
+                <div>
+                  <%= link_to "Edit this tasks", edit_task_path(task) %> |
+                  <%= link_to "Back to tasks", tasks_path %>
+
+                  <%= button_to "Destroy this tasks", task, method: :delete %>
+                </div>
+
+            </div>
+          </div>
+        </div>      
+
+        </div>
       <%end%>  
     <% end %>
       <div id = "new-tasks"></div>
   </div>
 
-
     <details id="completed-tasks">
       <summary>Completed tasks</summary>
-      
+        <% if @tasks.where(completed: true, user_id: current_user.id).count.zero?%>
+          <p>You have no completed tasks yet</p>
+        <%end%>
         <% @tasks.all.order('completed_time DESC').reject{|task| task.completed_time.nil?}.each do |task| %>
           <% if current_user.id == task.user_id && task.completed == true%>
             <div id="<%= dom_id task %>" class="task">
             <%=button_to " ", uncomplete_path(:task => task), style: "height:20px;width:20px;border-radius:20px;" %>
-            <strong>Title:</strong>
-            <%= task.title %>
-            <br/>
-            <strong>Completed:</strong>
-            <%= task.completed %>
-            <p>
-              <%= link_to "Show this task", task, class: 'link' %>
-            </p>
+            <div style="text-decoration: line-through">
+              <p>
+                <%= task.title %>
+              </p>
+            </div>
+
+                <div class="box">
+                  <a class="button"  href="#popup<%= dom_id task %>">ShowTask</a>
+                </div>
+
+                <div id = "popup<%= dom_id task %>" class="overlay">
+                  <div class="popup">
+                    <div class= "content">
+                      <strong>Title:</strong>
+                        <%= task.title %>
+                        <br/>
+                        <strong>Due:</strong>
+                        <%= task.due %>
+                        <% if user_signed_in?%>
+                          <strong>User id:</strong>
+                          <%= task.user_id %>
+                        <%end%>
+                        <strong>Completed:</strong>
+                        <%= task.completed %>
+
+                        <div>
+                          <%= link_to "Edit this tasks", edit_task_path(tasks) %> |
+                          <%= link_to "Back to tasks", tasks_path %>
+
+                          <%= button_to "Destroy this tasks", tasks, method: :delete %>
+                        </div>
+
+                    </div>
+                  </div>
+                </div>
           </div>
 
         <%end%>  
@@ -52,3 +109,6 @@
     </details>
 <%end%>
 
+
+
+<div id = "test"></div>

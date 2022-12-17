@@ -1,9 +1,15 @@
 <%=link_to "Week Calendar", week_path, type: "button", class: 'btn btn-primary'%>
+
+<%# <input id="toggle-on" class="toggle toggle-left" name="toggle" value="false" type="radio" checked>
+<label for="toggle-on" class="btn">Week</label>
+<input id="toggle-off" class="toggle toggle-right" name="toggle" value="true" type="radio">
+<label for="toggle-off" class="btn">Month</label> %>
+
+
 <%= month_calendar(events: @tasks) do |date, tasks| %>
   <%= date %>
 
   <% tasks.each do |tasks| %>
-  <%if tasks.user_id == current_user.id%>
     <% if tasks.completed %>
       <div style="text-decoration: line-through">
         <%= tasks.title %>
@@ -11,14 +17,14 @@
     <%else%>
       <div>
         <%= tasks.title %>
-
+    <%end%>
         <div class="box">
-          <a class="button" href="#popup2">ShowTask</a>
+          <a class="button"  href="#month<%= dom_id tasks %>">ShowTask</a>
         </div>
 
-        <div id = "popup2" class="overlay">
+        <div id = "month<%= dom_id tasks %>" class="overlay">
           <div class="popup">
-            <h2>New tasks</h2>
+          <a class="close" href="#">&times;</a>
             <div class= "content">
               <strong>Title:</strong>
                 <%= tasks.title %>
@@ -38,13 +44,10 @@
 
                   <%= button_to "Destroy this tasks", tasks, method: :delete %>
                 </div>
-
+              
             </div>
           </div>
-        </div>
 
-      </div>
-    <%end%>
+        </div>
   <% end %>
-  <%end%>
 <% end %>

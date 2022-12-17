@@ -31,16 +31,28 @@ class UsersController < ApplicationController
   # POST /users or /users.json
   def create
     @user = User.new(user_params)
+    @calendar = Calendar.new
+    @calendar.user_id = current_user.id
 
-    respond_to do |format|
-      if @user.save
-        format.html { redirect_to user_url(@user), notice: 'User was successfully created.' }
-        format.json { render :show, status: :created, location: @user }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
-      end
+    if !@user.save
+      flash[:error] = @user.errors.full_messages.join('! ')
+      redirect_to new_path
+    else
+      session[:user_id] = @user.id
+      session[:user_nick] = @user.nick
+      flash[:success] = "User was successfully created. Welcome, #{@user.email}!"
+      redirect_to root_path
     end
+
+    # respond_to do |format|
+    #   if @user.save
+    #     format.html { redirect_to user_url(@user), notice: 'User was successfully created.' }
+    #     format.json { render :show, status: :created, location: @user }
+    #   else
+    #     format.html { render :new, status: :unprocessable_entity }
+    #     format.json { render json: @user.errors, status: :unprocessable_entity }
+    #   end
+    # end
   end
 
   # PATCH/PUT /users/1 or /users/1.json

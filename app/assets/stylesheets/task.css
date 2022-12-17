@@ -1,7 +1,7 @@
 .task 
 {
     font-size: 20px;
-    margin: 20px 50px;
+    margin: 22px 50px;
     background-color: rgb(219, 196, 254);
     border-radius: 20px;
     padding: 10px;
@@ -10,7 +10,7 @@
 .task:hover
 {
     background-color: rgb(199, 168, 241);
-    font-size: 21px;
+    font-size: 23px;
     margin: 15px 45px;
 }
 .link
@@ -19,7 +19,10 @@
     color: black;
     margin: 5px;
 }
-
+.task p
+{
+  margin: 0px 20px;
+}
 details {
     border: 1px solid rgb(103, 127, 215);
     border-radius: 20px;

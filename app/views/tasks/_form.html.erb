@@ -26,12 +26,13 @@
     <%= form.date_field :due, id: "due-input", class: 'input-group date' %>
   </div>
 
-  <div>
-    <%= form.label :reminder, style: "display: block" %>
-    <%= form.check_box :reminder, id: "reminder" %>
+  <div id = "reminder-div">
+    <%= form.label "Set a reminder", style: "display: block"%>
+    <%= form.check_box :reminder, id: "toggle" %>
+    <label id = "reminder-label" for="toggle"></label>
   </div>
 
-  <div class = "reminder_show" style="display: none">
+  <div id = "reminder_show" style="visibility: hidden">
     <%= form.label :reminder_time, style: "display: block" %>
     <%= form.time_field :reminder_time %>
   </div>

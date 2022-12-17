@@ -3,7 +3,7 @@
     <h1>My account</h1>
     <div style="display:flex;">
       <%= link_to "Edit my account", edit_user_path(@user), class:'btn btn-primary' %>
-      <%= button_to "Delete my account", @user, method: :delete, class: 'btn btn-danger' %>    
+      <%= button_to "Delete my account", @user, method: :delete, data: {confirm: "Are you sure?"}, class: 'btn btn-danger' %>    
     </div>
     <p>
       <strong>Id:</strong>
@@ -46,5 +46,5 @@
       <%=@completed_tasks.count%>
     </p>
 
-    <%= column_chart @completed_tasks.group_by_day(:completed_time).count, style: "background-color:pink;" %>
+    <%= column_chart @completed_tasks.where("due >= ?", 1.week.ago).group_by_day(:due).count, style: "background-color:pink;" %>
 </div>

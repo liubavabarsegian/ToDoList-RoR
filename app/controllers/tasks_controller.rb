@@ -76,6 +76,7 @@ class TasksController < ApplicationController
     @task = Task.find(params[:task])
     @task.update_attribute(:completed, false)
     @task.update_attribute(:completed_time, nil)
+    redirect_to root_path
   end
 
   def completed_tasks
@@ -87,8 +88,8 @@ class TasksController < ApplicationController
   def refresh
     @task = Task.find(params[:task])
     @task.update_attribute(:completed, true)
-    puts DateTime.now
     @task.update_attribute(:completed_time, DateTime.now)
+    redirect_to root_path
   end
 
   private
