@@ -11,7 +11,6 @@
     </div>
   <% end %>
 
-
   <div>
     <%= form.label :title, style: "display: block" %>
     <%= form.text_field :title, class: 'form-control' %>
@@ -29,17 +28,12 @@
 
   <div>
     <%= form.label :reminder, style: "display: block" %>
-    <%= form.check_box :reminder %>
+    <%= form.check_box :reminder, id: "reminder" %>
   </div>
 
-  <div>
+  <div class = "reminder_show" style="display: none">
     <%= form.label :reminder_time, style: "display: block" %>
     <%= form.time_field :reminder_time %>
-  </div>
-
-  <div>
-    <%= form.label :completed, style: "display: block" %>
-    <%= form.check_box :completed %>
   </div>
 
   <div>

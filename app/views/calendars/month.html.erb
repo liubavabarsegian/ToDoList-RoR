@@ -11,6 +11,38 @@
     <%else%>
       <div>
         <%= tasks.title %>
+
+        <div class="box">
+          <a class="button" href="#popup2">ShowTask</a>
+        </div>
+
+        <div id = "popup2" class="overlay">
+          <div class="popup">
+            <h2>New tasks</h2>
+            <div class= "content">
+              <strong>Title:</strong>
+                <%= tasks.title %>
+                <br/>
+                <strong>Due:</strong>
+                <%= tasks.due %>
+                <% if user_signed_in?%>
+                  <strong>User id:</strong>
+                  <%= tasks.user_id %>
+                <%end%>
+                <strong>Completed:</strong>
+                <%= tasks.completed %>
+
+                <div>
+                  <%= link_to "Edit this tasks", edit_task_path(tasks) %> |
+                  <%= link_to "Back to tasks", tasks_path %>
+
+                  <%= button_to "Destroy this tasks", tasks, method: :delete %>
+                </div>
+
+            </div>
+          </div>
+        </div>
+
       </div>
     <%end%>
   <% end %>
