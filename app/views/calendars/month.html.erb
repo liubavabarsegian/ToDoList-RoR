@@ -6,48 +6,73 @@
 <label for="toggle-off" class="btn">Month</label> %>
 
 
-<%= month_calendar(events: @tasks) do |date, tasks| %>
-  <%= date %>
+<%= month_calendar(events: @tasks) do |date, task| %>
+  <div style="display: flex;justify-content:space-between">
+    <%= date %>
+    <div class="box">
+      <%=link_to '   +   ', "#new_task_modal", class:'calendar_button', type:'button'%>
+    </div>
+  </div>
 
-  <% tasks.each do |tasks| %>
-    <% if tasks.completed %>
+  <div id = "new_task_modal" class="overlay">
+    <div class="popup">
+    <a class="close" href="#">&times;</a>
+    <%@task = Task.new%>
+      <div class= "content">
+        <h1>New task</h1>
+        <%= render "tasks/form", task: @task %>
+        <br>
+        <div>
+          <%= link_to "Back to tasks", tasks_path, class: 'btn btn-outline-secondary' %>
+        </div>            
+      </div>
+    </div>
+  </div>
+  </div>
+
+
+  <% task.each do |task| %>
+  <div style= "display:flex;justify-content:space-between ">
+    <% if task.completed %>
       <div style="text-decoration: line-through">
-        <%= tasks.title %>
+        <%= task.title %>
       </div>
     <%else%>
       <div>
-        <%= tasks.title %>
+        <%= task.title %>
+      </div>
     <%end%>
         <div class="box">
-          <a class="button"  href="#month<%= dom_id tasks %>">ShowTask</a>
+          <a class="button"  href="#month<%= dom_id task %>">Open</a>
         </div>
 
-        <div id = "month<%= dom_id tasks %>" class="overlay">
+        <div id = "month<%= dom_id task %>" class="overlay">
           <div class="popup">
           <a class="close" href="#">&times;</a>
             <div class= "content">
               <strong>Title:</strong>
-                <%= tasks.title %>
+                <%= task.title %>
                 <br/>
                 <strong>Due:</strong>
-                <%= tasks.due %>
+                <%= task.due %>
                 <% if user_signed_in?%>
                   <strong>User id:</strong>
-                  <%= tasks.user_id %>
+                  <%= task.user_id %>
                 <%end%>
                 <strong>Completed:</strong>
-                <%= tasks.completed %>
+                <%= task.completed %>
 
                 <div>
-                  <%= link_to "Edit this tasks", edit_task_path(tasks) %> |
+                  <%= link_to "Edit this tasks", edit_task_path(task) %> |
                   <%= link_to "Back to tasks", tasks_path %>
 
-                  <%= button_to "Destroy this tasks", tasks, method: :delete %>
+                  <%= button_to "Destroy this tasks", task, method: :delete %>
                 </div>
               
             </div>
           </div>
 
         </div>
+  </div>
   <% end %>
 <% end %>

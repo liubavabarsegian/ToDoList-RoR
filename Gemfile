@@ -83,5 +83,4 @@ gem  'bootstrap-datepicker-rails'
 gem 'sass-rails'
 gem 'jquery-rails'
 gem "chartkick"
-gem 'histogram'
 gem "groupdate"

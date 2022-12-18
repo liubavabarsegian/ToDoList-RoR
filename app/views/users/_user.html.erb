@@ -46,5 +46,5 @@
       <%=@completed_tasks.count%>
     </p>
 
-    <%= column_chart @completed_tasks.where("due >= ?", 1.week.ago).group_by_day(:due).count, style: "background-color:pink;" %>
+    <%= column_chart @completed_tasks.where(completed_time: 1.week.ago..).group_by_day(:completed_time).count, xmin: Date.today%>
 </div>

@@ -96,3 +96,24 @@ input[type="radio"].toggle {
         }
     }
 }
+
+.calendar_button
+{
+    float: top;
+    border: 2px rgb(74, 78, 184) solid;
+    color: rgb(74, 78, 184);
+    border-radius: 90px;
+    text-decoration: none;
+    height: 25px;
+    width:  25px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: rgb(220, 238, 255);
+}
+.calendar_button:hover
+{
+    background-color: #567ec9;
+    color:white;
+}

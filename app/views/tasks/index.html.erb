@@ -91,10 +91,10 @@
                         <%= task.completed %>
 
                         <div>
-                          <%= link_to "Edit this tasks", edit_task_path(tasks) %> |
+                          <%= link_to "Edit this tasks", edit_task_path(task) %> |
                           <%= link_to "Back to tasks", tasks_path %>
 
-                          <%= button_to "Destroy this tasks", tasks, method: :delete %>
+                          <%= button_to "Destroy this tasks", task, method: :delete %>
                         </div>
 
                     </div>
