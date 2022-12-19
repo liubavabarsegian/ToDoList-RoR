@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class UsersController < ApplicationController
+  include UsersHelper
   before_action :set_user, only: %i[show edit update destroy]
 
   # GET /users or /users.json
@@ -13,8 +14,8 @@ class UsersController < ApplicationController
   def show
     redirect_to login_path unless user_signed_in?
     if user_signed_in?
-      @pending_tasks = Task.where(user_id: current_user.id, completed: false)
-      @completed_tasks = Task.where(user_id: current_user.id, completed: true)
+      @pending_tasks = Task.where(user_id: @user.id, completed: false)
+      @completed_tasks = Task.where(user_id: @user.id, completed: true)
     end
   end
 
@@ -29,16 +30,16 @@ class UsersController < ApplicationController
   # POST /users or /users.json
   def create
     @user = User.new(user_params)
-    @calendar = Calendar.new
-    @calendar.user_id = current_user.id
 
     if !@user.save
       flash[:error] = @user.errors.full_messages.join('! ')
       redirect_to new_path
     else
-      session[:user_id] = @user.id
-      session[:user_nick] = @user.nick
-      flash[:success] = "User was successfully created. Welcome, #{@user.email}!"
+      UserMailer.registration_confirmation(@user).deliver
+      flash[:success] = 'На указанную почту выслано письмо. Подтвердите почту, пожалуйста.'
+      # session[:user_id] = @user.id
+      # session[:user_nick] = @user.nick
+      # flash[:success] = "User was successfully created. Welcome, #{@user.email}!"
       redirect_to root_path
     end
 

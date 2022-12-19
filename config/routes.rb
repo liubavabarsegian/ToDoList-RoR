@@ -18,8 +18,10 @@ Rails.application.routes.draw do
   post 'complete', to: 'tasks#complete'
   post 'uncomplete', to: 'tasks#uncomplete'
   post 'refresh', to: 'tasks#refresh'
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
-  # Defines the root path route ("/")
-  # root "articles#index"
+  resources :users do
+    member do
+      get :confirm_email
+    end
+  end
 end

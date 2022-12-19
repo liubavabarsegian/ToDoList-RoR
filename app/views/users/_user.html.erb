@@ -46,5 +46,10 @@
       <%=@completed_tasks.count%>
     </p>
 
-    <%= column_chart @completed_tasks.where(completed_time: 1.week.ago..).group_by_day(:completed_time).count, xmin: Date.today%>
+    <%if current_user.id == user.id %>
+      <h1>Your progress this week</h1>
+    <%else%>
+      <h1><%=user.nick%>'s progress this week</h1>
+    <%end%>
+    <%= column_chart @completed_tasks.group_by_day(:completed_time, last:7).count%>
 </div>

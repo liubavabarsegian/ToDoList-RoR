@@ -12,10 +12,15 @@ class SessionsController < ApplicationController
     puts 'USERS IS SIGNED IN' if user_signed_in?
     puts 'USER IS NOT SIGNED IN' unless user_signed_in?
     if !!@user && @user.authenticate(params[:password])
-      session[:user_id] = @user.id
-      session[:user_nick] = @user.nick
-      flash[:success] = 'you have successfully logged in'
-      redirect_to root_path
+      if @user.email_confirmed?
+        session[:user_id] = @user.id
+        session[:user_nick] = @user.nick
+        flash[:success] = 'you have successfully logged in'
+        redirect_to root_path
+      else
+        flash[:error] = 'Confirm your email'
+        redirect_to new_path
+      end
     else
       flash[:error] = 'Incorrect password or email'
       redirect_to login_path
