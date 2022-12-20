@@ -9,6 +9,7 @@ class User < ApplicationRecord
   validates :email, presence: true, format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :nick, presence: true
   validates :password_digest, presence: true
+  validates :password_confirmation, presence: true # if new?
 
   before_create :confirmation_token
 

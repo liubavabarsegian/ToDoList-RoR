@@ -76,11 +76,8 @@ group :test do
   gem 'webdrivers'
 end
 
-gem 'addressable'
 gem 'bcrypt'
 gem "simple_calendar", "~> 2.4"
-gem  'bootstrap-datepicker-rails'
+
 gem 'sass-rails'
-gem 'jquery-rails'
 gem "chartkick"
-gem "groupdate"

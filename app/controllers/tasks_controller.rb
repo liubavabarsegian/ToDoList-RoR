@@ -34,10 +34,10 @@ class TasksController < ApplicationController
     respond_to do |format|
       if @task.save
         format.html { redirect_to root_path, notice: 'Task was successfully created.' }
-        format.json { render :show, status: :created, location: @task }
+        # format.json { render :show, status: :created, location: @task }
       else
         format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @task.errors, status: :unprocessable_entity }
+        # format.json { render json: @task.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -47,10 +47,10 @@ class TasksController < ApplicationController
     respond_to do |format|
       if @task.update(task_params)
         format.html { redirect_to task_url(@task), notice: 'Task was successfully updated.' }
-        format.json { render :show, status: :ok, location: @task }
+        # format.json { render :show, status: :ok, location: @task }
       else
         format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @task.errors, status: :unprocessable_entity }
+        # format.json { render json: @task.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -61,35 +61,31 @@ class TasksController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to tasks_url, notice: 'Task was successfully destroyed.' }
-      format.json { head :no_content }
+      # format.json { head :no_content }
     end
   end
 
   def complete
+    @tasks = Task.all
     @task = Task.find(params[:task])
     @task.update_attribute(:completed, true)
-    puts DateTime.now
     @task.update_attribute(:completed_time, DateTime.now)
+
+    respond_to do |format|
+      format.html         { render :complete } # renders `page.html.erb`
+      format.turbo_stream { render :complete } # renders `page.turbo_stream.erb`
+    end
   end
 
   def uncomplete
+    @tasks = Task.all
     @task = Task.find(params[:task])
     @task.update_attribute(:completed, false)
     @task.update_attribute(:completed_time, nil)
-    redirect_to root_path
-  end
-
-  def completed_tasks
-    @task.update_attribute(:completed, true)
-    @tasks = Task.where(completed: true)
-  end
-
-
-  def refresh
-    @task = Task.find(params[:task])
-    @task.update_attribute(:completed, true)
-    @task.update_attribute(:completed_time, DateTime.now)
-    redirect_to root_path
+    respond_to do |format|
+      format.html         { render :uncomplete } # renders `page.html.erb`
+      format.turbo_stream { render :uncomplete } # renders `page.turbo_stream.erb`
+    end
   end
 
   private
