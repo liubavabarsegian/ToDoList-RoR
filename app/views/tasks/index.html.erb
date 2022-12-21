@@ -1,29 +1,60 @@
+<script>
+  function play_good() {
+    var audio_good = document.getElementById("si");
+    audio_good.play();
+  }
+  function play_bad() {
+    var audio_bad = document.getElementById("sad_violin");
+    audio_bad.play();
+  }
+</script>
+
+<audio id="wahwahwah" src="<%= asset_path('wahwahwah.mp3') %>"></audio>
+<audio id="sad_violin" src="<%= asset_path('sad_violin.mp3') %>"></audio>
+<audio id="spongebob-fail" src="<%= asset_path('spongebob-fail.mp3') %>"></audio>
+<audio id="si" src="<%= asset_path('si.mp3') %>"></audio>
+<audio id="done" src="<%= asset_path('done.mp3') %>"></audio>
+<audio id="beep" src="<%= asset_path('beep.mp3') %>"></audio>
+<audio id="coins" src="<%= asset_path('coins.mp3') %>"></audio>
+<audio id="oou" src="<%= asset_path('oou.mp3') %>"></audio>
+<audio id="piu" src="<%= asset_path('piu.mp3') %>"></audio>
+<audio id="wet" src="<%= asset_path('wet.mp3') %>"></audio>
+<audio id="accomplished" src="<%= asset_path('accomplished.mp3') %>"></audio>
+<audio id="ddd" src="<%= asset_path('ddd.mp3') %>"></audio>
+<audio id="elegant" src="<%= asset_path('elegant.mp3') %>"></audio>
+<audio id="error" src="<%= asset_path('error.mp3') %>"></audio>
+<audio id="p" src="<%= asset_path('p.mp3') %>"></audio>
+<audio id="smile-ringtone" src="<%= asset_path('smile-ringtone.mp3') %>"></audio>
+<audio id="swiftly" src="<%= asset_path('swiftly.mp3') %>"></audio>
+<audio id="system-fault" src="<%= asset_path('system-fault.mp3') %>"></audio>
+<audio id="yo" src="<%= asset_path('yo.mp3') %>"></audio>
+
 <% if user_signed_in?%>
   <p style="color: green"><%= notice %></p>
-  
     <h1>Pending tasks</h1>
-    <%= link_to "New task", new_task_path, data: { turbo_frame: "bruh" }, type:"button", id: "btn-add", class: "btn glow-on-hover", style:'color:white;font-size:25px' %>
+    <%= link_to "New task", new_task_path, type:"button", id: "btn-add", class: "btn glow-on-hover", style:'color:white;font-size:25px' %>
     <br/>
     <div id="pending-tasks">
-    <% if @tasks.where(completed: false, user_id: current_user.id).count.zero?%>
+    <% if @tasks.where(completed: false).count.zero?%>
           <p style="font-size:20px;text-align:center">All tasks are completed! Congratulations!</p>
           <img src = "<%= image_path('completed.jpg') %>" alt= "completed_image" style="width:25%;margin-left:37%">
     <%end%>
     
     <% @tasks.all.order('created_at DESC').each do |task| %>
-      <% if current_user.id == task.user_id && task.completed == false%>
+      <% if task.completed == false%>
         <div id="<%= dom_id task %>" class="task">
 
-        <%=button_to " ", complete_path(task: task), style: "height:25px;width:25px;border-radius:20px;" %> 
+        <%=button_to " ", complete_path(task: task), class: 'btn_instead_of_checkbox', onclick:"play_good()"%> 
         <p>
           <%= task.title %>
         </p>
 
+        <%=link_to "bruh   ", "/tasks/#{task.id}" %>
         <div class="box">
-          <a class="button"  href="#popup<%= dom_id task %>">ShowTask</a>
+          <a class="button"  href="#popup<%= dom_id task %>" data-toggle="modal">ShowTask</a>
         </div>
 
-        <div id = "popup<%= dom_id task %>" class="overlay">
+        <div id = "popup<%= dom_id task %>" class="overlay modal">
           <div class="popup">
           <a class="close" href="#">&times;</a>
             <div class= "content">
@@ -56,15 +87,18 @@
   </div>
 
     <details >
-      <summary>Completed tasks</summary>
+      <summary>
+      <label>Completed tasks</label>
+      <%# <%= select_tag('options', options_from_collection_for_select([['Today', 'today'], ['This week', 'week'], ['This month', 'month'], ['All the time', 'all']], 'option', 'today'), class: "form-select") %>
+      </summary>
       <div id="completed-tasks">
-        <% if @tasks.where(completed: true, user_id: current_user.id).count.zero?%>
+        <% if @tasks.where(completed: true).count.zero?%>
           <p>You have no completed tasks yet</p>
         <%end%>
         <% @tasks.all.order('completed_time DESC').reject{|task| task.completed_time.nil?}.each do |task| %>
-          <% if current_user.id == task.user_id && task.completed == true%>
+          <% if task.completed == true%>
             <div id="<%= dom_id task %>" class="task">
-            <%=button_to "", uncomplete_path(:task => task), style: "height:20px;width:20px;border-radius:20px;" %>
+            <%=button_to " ", uncomplete_path(:task => task), class: 'btn_instead_of_checkbox_return', onclick:"play_bad()"%>
             <div style="text-decoration: line-through">
               <p>
                 <%= task.title %>

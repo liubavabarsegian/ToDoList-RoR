@@ -102,3 +102,29 @@ details[open] summary {
       width: 70%;
     }
   }
+
+
+  #completed_time_options
+  {
+    width: 150px;
+  }
+.btn_instead_of_checkbox
+{
+  height:25px;
+  width:25px;
+  border-radius:20px;
+}
+.btn_instead_of_checkbox:hover
+{
+  background-color: #6673bb;
+}
+.btn_instead_of_checkbox_return
+{
+  height:25px;
+  width:25px;
+  border-radius:20px;
+}
+.btn_instead_of_checkbox_return:hover
+{
+  background-color: #bc124b;
+}

@@ -10,13 +10,13 @@
   <div style="display: flex;justify-content:space-between">
     <%= date %>
     <div class="box">
-      <%=link_to '   +   ', "#new_task_modal", class:'calendar_button', type:'button'%>
+      <%=link_to '+', "#new_task_modal", class:'calendar_button', type:'button'%>
     </div>
   </div>
 
   <div id = "new_task_modal" class="overlay">
     <div class="popup">
-    <a class="close" href="#">&times;</a>
+    <a class="close" href="/#">&times;</a>
     <%@task = Task.new%>
       <div class= "content">
         <h1>New task</h1>

@@ -1,10 +1,10 @@
-<% if @tasks.where(completed: true, user_id: current_user.id).count.zero?%>
+        <% if @tasks.where(completed: true).count.zero?%>
           <p>You have no completed tasks yet</p>
         <%end%>
         <% @tasks.all.order('completed_time DESC').reject{|task| task.completed_time.nil?}.each do |task| %>
-          <% if current_user.id == task.user_id && task.completed == true%>
+          <% if task.completed == true%>
             <div id="<%= dom_id task %>" class="task">
-            <%=button_to "", uncomplete_path(:task => task), style: "height:20px;width:20px;border-radius:20px;" %>
+            <%=button_to "", uncomplete_path(:task => task), class: 'btn_instead_of_checkbox_return', onclick:"play_bad()"%>
             <div style="text-decoration: line-through">
               <p>
                 <%= task.title %>

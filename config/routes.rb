@@ -16,7 +16,6 @@ Rails.application.routes.draw do
 
   post '/complete', to: 'tasks#complete'
   post '/uncomplete', to: 'tasks#uncomplete'
-  post '/refresh', to: 'tasks#refresh'
   
   resources :users do
     member do

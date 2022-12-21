@@ -5,9 +5,16 @@ class TasksController < ApplicationController
 
   # GET /tasks or /tasks.json
   def index
-    redirect_to login_path unless user_signed_in?
     @tasks = Task.all
-    @pending_tasks = Task.where(user_id: current_user.id).count if user_signed_in?
+    redirect_to login_path unless user_signed_in?
+    return unless user_signed_in?
+
+    @option = page_params[:option]
+    puts "AAA"
+    puts page_params
+    puts @option
+    @tasks = Task.where(user_id: current_user.id)
+    @pending_tasks = Task.where(user_id: current_user.id).count
   end
 
   # GET /tasks/1 or /tasks/1.json
@@ -98,5 +105,9 @@ class TasksController < ApplicationController
   # Only allow a list of trusted parameters through.
   def task_params
     params.require(:task).permit(:title, :description, :due, :reminder, :reminder_time, :completed)
+  end
+
+  def page_params
+    params.permit(:option, :value)
   end
 end

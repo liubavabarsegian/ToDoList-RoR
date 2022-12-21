@@ -1,22 +1,23 @@
-<% if @tasks.where(completed: false, user_id: current_user.id).count.zero?%>
+<% if @tasks.where(completed: false).count.zero?%>
           <p style="font-size:20px;text-align:center">All tasks are completed! Congratulations!</p>
           <img src = "<%= image_path('completed.jpg') %>" alt= "completed_image" style="width:25%;margin-left:37%">
     <%end%>
     
     <% @tasks.all.order('created_at DESC').each do |task| %>
-      <% if current_user.id == task.user_id && task.completed == false%>
+      <% if task.completed == false%>
         <div id="<%= dom_id task %>" class="task">
 
-        <%=button_to " ", complete_path(task: task), style: "height:25px;width:25px;border-radius:20px;" %> 
+        <%=button_to " ", complete_path(task: task), class: 'btn_instead_of_checkbox', onclick:"play_good()"%> 
         <p>
           <%= task.title %>
         </p>
 
+        <%=link_to "bruh   ", "/tasks/#{task.id}" %>
         <div class="box">
-          <a class="button"  href="#popup<%= dom_id task %>">ShowTask</a>
+          <a class="button"  href="#popup<%= dom_id task %>" data-toggle="modal">ShowTask</a>
         </div>
 
-        <div id = "popup<%= dom_id task %>" class="overlay">
+        <div id = "popup<%= dom_id task %>" class="overlay modal">
           <div class="popup">
           <a class="close" href="#">&times;</a>
             <div class= "content">
