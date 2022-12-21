@@ -1,4 +1,9 @@
 Rails.application.routes.draw do 
+  get 'friends/send_request'
+  get 'friends/get_request'
+  get 'friends/accept_request'
+  get 'friends/decline_request'
+  get 'friends/destroy_friendship'
 
   resources :tasks
   resource :session, only: %i[new create destroy]

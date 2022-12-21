@@ -9,7 +9,7 @@ class TasksController < ApplicationController
     redirect_to login_path unless user_signed_in?
     return unless user_signed_in?
     @option = "today"
-    @tasks = Task.where(user_id: current_user.id)
+    @tasks = Task.all.where(user_id: current_user.id)
     @pending_tasks = Task.where(user_id: current_user.id).count
   end
 
@@ -80,7 +80,7 @@ class TasksController < ApplicationController
     redirect_to login_path unless user_signed_in?
     return unless user_signed_in?
 
-    @tasks = Task.all
+    @tasks = Task.all.where(user_id: current_user.id)
     @task = Task.find(params[:task])
     @task.update_attribute(:completed, true)
     @task.update_attribute(:completed_time, DateTime.now)
@@ -95,7 +95,7 @@ class TasksController < ApplicationController
     redirect_to login_path unless user_signed_in?
     return unless user_signed_in?
 
-    @tasks = Task.all
+    @tasks = Task.all.where(user_id: current_user.id)
     @task = Task.find(params[:task])
     @task.update_attribute(:completed, false)
     @task.update_attribute(:completed_time, nil)
@@ -108,7 +108,7 @@ class TasksController < ApplicationController
   end
 
   def choose
-    @tasks = Task.all
+    @tasks = Task.all.where(user_id: current_user.id)
     redirect_to login_path unless user_signed_in?
     return unless user_signed_in?
     

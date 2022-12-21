@@ -2,6 +2,7 @@
 
 class User < ApplicationRecord
   has_secure_password
+  # has_many: :friends
 
   validates_uniqueness_of :nick, message: 'already exists'
   validates_uniqueness_of :email, message: 'already exists'
