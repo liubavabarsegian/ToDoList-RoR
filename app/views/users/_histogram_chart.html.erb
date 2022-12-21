@@ -1,0 +1,1 @@
+<%= column_chart @completed_tasks.group_by_day(:completed_time, last:7).count, id: "histogram", colors: [@color]%>

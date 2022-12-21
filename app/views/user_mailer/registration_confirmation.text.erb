@@ -1,5 +1,5 @@
-<%= @user.nick %>,
 
-Thank you for registering!
+Привет, <%= @user.nick %>!
 
-Edit profile: <%= edit_user_url(@user) %>
+Спасибо за регистрацию. Чтобы перейди, пройди по ссылке ниже :)
+<%= link_to 'Подвердить', confirm_email_user_url(@user.confirm_token, email: @user.email) %>

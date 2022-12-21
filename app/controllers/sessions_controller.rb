@@ -11,15 +11,16 @@ class SessionsController < ApplicationController
     @user = User.find_by(email: params[:email])
     puts 'USERS IS SIGNED IN' if user_signed_in?
     puts 'USER IS NOT SIGNED IN' unless user_signed_in?
-    if !!@user && @user.authenticate(params[:password])
-      if 1 #@user.email_confirmed?
+    puts params[:password]
+    if !!@user #&& @user.authenticate(params[:password])
+      if @user.email_confirmed?
         session[:user_id] = @user.id
         session[:user_nick] = @user.nick
         flash[:success] = 'you have successfully logged in'
         redirect_to root_path
       else
         flash[:error] = 'Confirm your email'
-        redirect_to new_path
+        redirect_to login_path
       end
     else
       flash[:error] = 'Incorrect password or email'
@@ -29,6 +30,9 @@ class SessionsController < ApplicationController
   # rubocop:enable Metrics/MethodLength, Metrics/AbcSize
 
   def destroy
+    redirect_to login_path unless user_signed_in?
+    return unless user_signed_in?
+    
     puts 'USERS IS SIGNED IN' if user_signed_in?
     puts 'USER IS NOT SIGNED IN' unless user_signed_in?
     session.delete :user_id

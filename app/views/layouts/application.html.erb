@@ -107,10 +107,12 @@
 
 
     <footer>  
-      <div id = "never_gonna_give_you_up">
-        <h3>Don't click me!</h3>
-        <iframe width="110" height="100" src="https://www.myinstants.com/instant/click-here/embed/" frameborder="0" scrolling="no"></iframe>
-      </div>
+      <% if user_signed_in?%>
+        <div id = "never_gonna_give_you_up">
+          <h3>Don't click me!</h3>
+          <iframe width="110" height="100" src="https://www.myinstants.com/instant/click-here/embed/" frameborder="0" scrolling="no"></iframe>
+        </div>
+      <%end%>
     </footer>
   </body>
 </html>

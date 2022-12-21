@@ -19,6 +19,7 @@ class TasksController < ApplicationController
   # GET /tasks/new
   def new
     redirect_to login_path unless user_signed_in?
+    return unless user_signed_in?
     @task = Task.new
   end
 
@@ -28,6 +29,7 @@ class TasksController < ApplicationController
   # POST /tasks or /tasks.json
   def create
     redirect_to login_path unless user_signed_in?
+    return unless user_signed_in?
 
     if user_signed_in?
       @task = Task.new(task_params)
@@ -47,6 +49,9 @@ class TasksController < ApplicationController
 
   # PATCH/PUT /tasks/1 or /tasks/1.json
   def update
+    redirect_to login_path unless user_signed_in?
+    return unless user_signed_in?
+
     respond_to do |format|
       if @task.update(task_params)
         format.html { redirect_to task_url(@task), notice: 'Task was successfully updated.' }
@@ -60,6 +65,9 @@ class TasksController < ApplicationController
 
   # DELETE /tasks/1 or /tasks/1.json
   def destroy
+    redirect_to login_path unless user_signed_in?
+    return unless user_signed_in?
+
     @task.destroy
 
     respond_to do |format|
@@ -69,13 +77,14 @@ class TasksController < ApplicationController
   end
 
   def complete
+    redirect_to login_path unless user_signed_in?
+    return unless user_signed_in?
+
     @tasks = Task.all
     @task = Task.find(params[:task])
     @task.update_attribute(:completed, true)
     @task.update_attribute(:completed_time, DateTime.now)
 
-
-    @option = "today"
     respond_to do |format|
       format.html         { render :complete } # renders `page.html.erb`
       format.turbo_stream { render :complete } # renders `page.turbo_stream.erb`
@@ -83,12 +92,15 @@ class TasksController < ApplicationController
   end
 
   def uncomplete
+    redirect_to login_path unless user_signed_in?
+    return unless user_signed_in?
+
     @tasks = Task.all
     @task = Task.find(params[:task])
     @task.update_attribute(:completed, false)
     @task.update_attribute(:completed_time, nil)
     
-    @option = "today"
+    # @option = "today"
     respond_to do |format|
       format.html         { render :uncomplete } # renders `page.html.erb`
       format.turbo_stream { render :uncomplete } # renders `page.turbo_stream.erb`
@@ -97,7 +109,9 @@ class TasksController < ApplicationController
 
   def choose
     @tasks = Task.all
-
+    redirect_to login_path unless user_signed_in?
+    return unless user_signed_in?
+    
     puts "choose"
     puts @option
     @option = page_params[:option]

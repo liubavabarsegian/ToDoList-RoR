@@ -52,5 +52,7 @@
       <h1><%=user.nick%>'s progress this week</h1>
     <%end%>
     
-    <%= column_chart @completed_tasks.group_by_day(:completed_time, last:7).count%>
+
+
+    <%= column_chart @completed_tasks.group_by_day(:completed_time, last:7).count, id: "histogram"%>
 </div>

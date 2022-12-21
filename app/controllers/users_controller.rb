@@ -2,7 +2,8 @@
 
 class UsersController < ApplicationController
   include UsersHelper
-  before_action :set_user, only: %i[show edit update destroy]
+  before_action :set_user, only: %i[show edit update destroy choose_color]
+  # before_action :set_color, only: %i[show]
 
   # GET /users or /users.json
   def index
@@ -36,6 +37,8 @@ class UsersController < ApplicationController
       redirect_to new_path
     else
       UserMailer.registration_confirmation(@user).deliver
+      # flash[:success] session[:user_id] = @user.id
+
       flash[:success] = 'На указанную почту выслано письмо. Подтвердите почту, пожалуйста.'
       # session[:user_id] = @user.id
       # session[:user_nick] = @user.nick
@@ -56,8 +59,6 @@ class UsersController < ApplicationController
 
   # PATCH/PUT /users/1 or /users/1.json
   def update
- 
-    puts @color;
     respond_to do |format|
       if @user.update(user_params)
         format.html { redirect_to user_url(@user), notice: 'User was successfully updated.' }
@@ -80,6 +81,29 @@ class UsersController < ApplicationController
     end
   end
 
+  # def choose_color
+  #   redirect_to login_path unless user_signed_in?
+
+  #   @completed_tasks = Task.where(user_id: @user.id, completed: true)
+  #   @colo  # def choose_color
+  #   redirect_to login_path unless user_signed_in?
+
+  #   @completed_tasks = Task.where(user_id: @user.id, completed: true)
+  #   @color = params[:color]
+  #   puts @color
+  #   puts "color"
+  #   respond_to do |format|
+  #     format.html         { render :choose_color } # renders `page.html.erb`
+  #     format.turbo_stream { render :choose_color } # renders `page.turbo_stream.erb`
+  #   end
+  # endr = params[:color]
+  #   puts @color
+  #   puts "color"
+  #   respond_to do |format|
+  #     format.html         { render :choose_color } # renders `page.html.erb`
+  #     format.turbo_stream { render :choose_color } # renders `page.turbo_stream.erb`
+  #   end
+  # end
   private
 
   # Use callbacks to share common setup or constraints between actions.
@@ -89,6 +113,6 @@ class UsersController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def user_params
-    params.require(:user).permit(:nick, :name, :surname, :email, :password, :color)
+    params.require(:user).permit(:nick, :name, :surname, :email, :password, :password_confirmation)
   end
 end

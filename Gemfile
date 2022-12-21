@@ -78,7 +78,6 @@ end
 
 gem 'bcrypt'
 gem "simple_calendar", "~> 2.4"
-
 gem 'sass-rails'
 gem "chartkick"
 gem "groupdate"

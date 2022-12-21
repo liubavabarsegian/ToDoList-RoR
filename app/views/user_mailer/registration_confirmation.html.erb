@@ -1,5 +1,7 @@
-<p><%= @user.name %>,</p>
+<h1> Привет, <%= @user.nick %>! 👋≧◉ᴥ◉≦ </h1>
 
-<p>Thank you for registering!</p>
-
-<p><%= link_to "Edit profile", edit_user_url(@user) %></p>
+<p>
+  Спасибо за регистрацию. Чтобы продолжить, перейди по ссылке ниже :)
+  <br/>
+  <%= link_to 'Подвердить', confirm_email_user_url(@user.confirm_token, email: @user.email) %>
+</p>
