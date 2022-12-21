@@ -2,17 +2,13 @@
 
 class TasksController < ApplicationController
   before_action :set_task, only: %i[show edit update destroy]
-
+  after_action :set_option, only: %i[index]
   # GET /tasks or /tasks.json
   def index
     @tasks = Task.all
     redirect_to login_path unless user_signed_in?
     return unless user_signed_in?
-
-    @option = page_params[:option]
-    puts "AAA"
-    puts page_params
-    puts @option
+    @option = "today"
     @tasks = Task.where(user_id: current_user.id)
     @pending_tasks = Task.where(user_id: current_user.id).count
   end
@@ -78,6 +74,8 @@ class TasksController < ApplicationController
     @task.update_attribute(:completed, true)
     @task.update_attribute(:completed_time, DateTime.now)
 
+
+    @option = "today"
     respond_to do |format|
       format.html         { render :complete } # renders `page.html.erb`
       format.turbo_stream { render :complete } # renders `page.turbo_stream.erb`
@@ -89,9 +87,25 @@ class TasksController < ApplicationController
     @task = Task.find(params[:task])
     @task.update_attribute(:completed, false)
     @task.update_attribute(:completed_time, nil)
+    
+    @option = "today"
     respond_to do |format|
       format.html         { render :uncomplete } # renders `page.html.erb`
       format.turbo_stream { render :uncomplete } # renders `page.turbo_stream.erb`
+    end
+  end
+
+  def choose
+    @tasks = Task.all
+
+    puts "choose"
+    puts @option
+    @option = page_params[:option]
+    puts "bruh"
+    puts @option
+    respond_to do |format|
+      format.html         { render :choose } # renders `page.html.erb`
+      format.turbo_stream { render :choose } # renders `page.turbo_stream.erb`
     end
   end
 
@@ -108,6 +122,10 @@ class TasksController < ApplicationController
   end
 
   def page_params
-    params.permit(:option, :value)
+    params.permit(:option)
+  end
+
+  def set_option
+    @option = "today"
   end
 end

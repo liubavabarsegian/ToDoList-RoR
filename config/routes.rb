@@ -16,6 +16,7 @@ Rails.application.routes.draw do
 
   post '/complete', to: 'tasks#complete'
   post '/uncomplete', to: 'tasks#uncomplete'
+  post '/choose', to: 'tasks#choose'
   
   resources :users do
     member do

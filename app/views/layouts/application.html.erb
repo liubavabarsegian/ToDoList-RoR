@@ -78,6 +78,34 @@
     </div>
     <%= yield %>
 
+
+
+
+    <div class="modal fade" id="new_task" tabindex="-1" aria-labelledby="new_task_label" aria-hidden="true">
+      <div class="modal-dialog  modal-xl">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title" id="new_task_label">New Task</h4>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+          </div>
+          <div class="modal-body">
+            <%@task = Task.new%>
+            <div class= "content">
+              <%= render "tasks/form", task: @task %>
+              <br>
+              <div>
+                <%= link_to "Back to tasks", tasks_path, class: 'btn btn-outline-secondary' %>
+              </div>            
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+          </div>
+        </div>
+      </div>
+    </div> 
+
+
     <footer>  
       <div id = "never_gonna_give_you_up">
         <h3>Don't click me!</h3>

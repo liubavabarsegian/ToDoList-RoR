@@ -1,0 +1,18 @@
+<strong>Title:</strong>
+<%= task.title %>
+<br/>
+<strong>Due:</strong>
+<%= task.due %>
+<% if user_signed_in?%>
+    <strong>User id:</strong>
+    <%= task.user_id %>
+<%end%>
+<strong>Completed:</strong>
+<%= task.completed %>
+
+<div>
+    <%= link_to "Edit this tasks", edit_task_path(task) %> |
+    <%= link_to "Back to tasks", tasks_path %>
+
+    <%= button_to "Destroy this tasks", task, method: :delete %>
+</div>

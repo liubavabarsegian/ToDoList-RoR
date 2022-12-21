@@ -9,26 +9,9 @@
 <%= month_calendar(events: @tasks) do |date, task| %>
   <div style="display: flex;justify-content:space-between">
     <%= date %>
-    <div class="box">
-      <%=link_to '+', "#new_task_modal", class:'calendar_button', type:'button'%>
-    </div>
+    <button type="button" class="calendar_button" data-bs-toggle="modal" data-bs-target="#new_task">+</button>
   </div>
 
-  <div id = "new_task_modal" class="overlay">
-    <div class="popup">
-    <a class="close" href="/#">&times;</a>
-    <%@task = Task.new%>
-      <div class= "content">
-        <h1>New task</h1>
-        <%= render "tasks/form", task: @task %>
-        <br>
-        <div>
-          <%= link_to "Back to tasks", tasks_path, class: 'btn btn-outline-secondary' %>
-        </div>            
-      </div>
-    </div>
-  </div>
-  </div>
 
 
   <% task.each do |task| %>
@@ -42,37 +25,25 @@
         <%= task.title %>
       </div>
     <%end%>
-        <div class="box">
-          <a class="button"  href="#month<%= dom_id task %>">Open</a>
-        </div>
+    <a class="link" data-bs-toggle="modal" data-bs-target="#month<%= dom_id task %>">Open</a>
 
-        <div id = "month<%= dom_id task %>" class="overlay">
-          <div class="popup">
-          <a class="close" href="#">&times;</a>
-            <div class= "content">
-              <strong>Title:</strong>
-                <%= task.title %>
-                <br/>
-                <strong>Due:</strong>
-                <%= task.due %>
-                <% if user_signed_in?%>
-                  <strong>User id:</strong>
-                  <%= task.user_id %>
-                <%end%>
-                <strong>Completed:</strong>
-                <%= task.completed %>
-
-                <div>
-                  <%= link_to "Edit this tasks", edit_task_path(task) %> |
-                  <%= link_to "Back to tasks", tasks_path %>
-
-                  <%= button_to "Destroy this tasks", task, method: :delete %>
-                </div>
-              
-            </div>
+    <div class="modal fade" id="month<%= dom_id task %>" tabindex="-1" aria-labelledby="open_label" aria-hidden="true">
+      <div class="modal-dialog  modal-xl">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title" id="open_label">Task</h4>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
           </div>
-
+          <div class="modal-body">
+            <%= render "tasks/task_show", task: task %>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+          </div>
         </div>
+      </div>
+    </div> 
   </div>
   <% end %>
 <% end %>
+
