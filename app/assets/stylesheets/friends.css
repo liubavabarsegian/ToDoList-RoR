@@ -1,0 +1,19 @@
+.friend
+{
+    display: flex;
+    font-size: 23px;
+    justify-content: space-around;
+    background-color: rgb(190, 191, 224);
+    border-radius: 20px;
+    margin: 20px 50px;
+    padding: 5px;
+}
+.friend:hover
+{
+    font-size: 25px;
+    margin: 18px 48px;
+}
+.friend .btn
+{
+    margin: 0px;
+}

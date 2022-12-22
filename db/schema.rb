@@ -15,9 +15,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_21_222750) do
   enable_extension "plpgsql"
 
   create_table "friends", force: :cascade do |t|
-    t.boolean "incoming_request"
-    t.boolean "sent_request"
-    t.boolean "friendship"
+    t.boolean "incoming_request", default: false
+    t.boolean "sent_request", default: false
+    t.boolean "friendship", default: false
     t.integer "friend_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
