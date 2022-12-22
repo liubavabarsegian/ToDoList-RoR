@@ -20,12 +20,13 @@
 <div id="friends">
   <% @friends.each do |friend| %>
     <div id="<%= dom_id friend %>" class = "friend">
+      <% @user = User.where(id: friend.user_id)[0]%>
       <p>
         <strong>Nick:</strong>
-        <%= friend.nick %>
+        <%= @user.nick %>
       </p>
       <p>
-      <%= link_to "Show this friend", friend, class: 'link'%>
+      <%= link_to "Show this friend", @user, class: 'link'%>
     </p>
     </div>
   <% end %>

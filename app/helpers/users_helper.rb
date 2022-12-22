@@ -6,6 +6,8 @@ module UsersHelper
         if user
           user.email_activate
           flash[:success] = "Welcome, #{user.nick}"
+          session[:user_id] = user.id
+          session[:user_nick] = user.nick
           redirect_to root_path
           return
         else

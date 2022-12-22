@@ -78,7 +78,7 @@
       Completed tasks
       <%= form_with url: "/choose", method: :post, id: 'options'  do |form|%>
         <%= form.select :option, [["today", "today"], ["this week", "week"], ["this month", "month"], ["all the time", "all"]], selected: @option, onchange: 'this.form.submit()' %>
-        <%= form.submit 'show'%>
+        <%= form.submit 'show', class: 'btn btn-outline-primary'%>
       <% end %>
       
       </summary>

@@ -12,7 +12,7 @@ class SessionsController < ApplicationController
     puts 'USERS IS SIGNED IN' if user_signed_in?
     puts 'USER IS NOT SIGNED IN' unless user_signed_in?
     puts params[:password]
-    if !!@user #&& @user.authenticate(params[:password])
+    if !!@user && @user.authenticate(params[:password])
       if @user.email_confirmed?
         session[:user_id] = @user.id
         session[:user_nick] = @user.nick

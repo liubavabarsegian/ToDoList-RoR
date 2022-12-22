@@ -2,7 +2,7 @@
 
 class TasksController < ApplicationController
   before_action :set_task, only: %i[show edit update destroy]
-  after_action :set_option, only: %i[index]
+  # after_action :set_option, only: %i[index]
   # GET /tasks or /tasks.json
   def index
     @tasks = Task.all
@@ -111,12 +111,9 @@ class TasksController < ApplicationController
     @tasks = Task.all.where(user_id: current_user.id)
     redirect_to login_path unless user_signed_in?
     return unless user_signed_in?
-    
-    puts "choose"
-    puts @option
+
     @option = page_params[:option]
-    puts "bruh"
-    puts @option
+
     respond_to do |format|
       format.html         { render :choose } # renders `page.html.erb`
       format.turbo_stream { render :choose } # renders `page.turbo_stream.erb`

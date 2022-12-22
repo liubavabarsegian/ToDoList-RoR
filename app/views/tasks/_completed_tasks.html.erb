@@ -1,8 +1,8 @@
-<% if @tasks.where(completed: true).count.zero?%>
+        <% if @tasks.where(completed: true).count.zero?%>
           <p>You have no completed tasks yet</p>
         <%end%>
         <% @tasks.all.where(completed: true).order('completed_time DESC').reject{|task| task.completed_time.nil?}.each do |task| %>
-          <% if 1 || task.completed_time.today? && @option == "today"|| task.completed_time.month == Date.today.month && @option == "month" || task.completed_time.to_date.cweek == Date.today.cweek && @option == "week"|| @option == "all"%>
+          <% if task.completed_time.today? && @option == "today"|| task.completed_time.month == Date.today.month && @option == "month" || task.completed_time.to_date.cweek == Date.today.cweek && @option == "week"|| @option == "all"%>
             <div id="<%= dom_id task %>" class="task">
             <%=button_to " ", uncomplete_path(:task => task), class: 'btn_instead_of_checkbox_return', onclick:"play_bad()"%>
             <div style="text-decoration: line-through">
@@ -10,37 +10,24 @@
                 <%= task.title %>
               </p>
             </div>
-
-                <div class="box">
-                  <a class="button"  href="#popup<%= dom_id task %>">ShowTask</a>
-                </div>
-
-                <div id = "popup<%= dom_id task %>" class="overlay">
-                  <div class="popup">
-                    <div class= "content">
-                      <strong>Title:</strong>
-                        <%= task.title %>
-                        <br/>
-                        <strong>Due:</strong>
-                        <%= task.due %>
-                        <% if user_signed_in?%>
-                          <strong>User id:</strong>
-                          <%= task.user_id %>
-                        <%end%>
-                        <strong>Completed:</strong>
-                        <%= task.completed %>
-
-                        <div>
-                          <%= link_to "Edit this tasks", edit_task_path(task) %> |
-                          <%= link_to "Back to tasks", tasks_path %>
-
-                          <%= button_to "Destroy this tasks", task, method: :delete %>
-                        </div>
-
-                    </div>
+            <a class="link" data-bs-toggle="modal" data-bs-target="#pending<%= dom_id task %>">Open</a>
+            <div class="modal fade" id="pending<%= dom_id task %>" tabindex="-1" aria-labelledby="open_label" aria-hidden="true">
+              <div class="modal-dialog  modal-xl">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h4 class="modal-title" id="open_label">Task</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+                  </div>
+                  <div class="modal-body">
+                    <%= render "task_show", task: task %>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
                   </div>
                 </div>
+              </div>
+            </div>
+          
           </div>
-
           <%end%>  
         <% end %>
