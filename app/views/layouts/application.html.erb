@@ -48,7 +48,8 @@
                       <%= session[:user_nick]%>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                      <li><%=link_to "My account", "/users/#{session[:user_id]}", class: "dropdown-item btn", type: "button"%></li>
+                      <li><%=button_to "My account", "/users/#{session[:user_id]}", class: "dropdown-item btn", method: :get, type: "button"%></li>
+                      <li><%=button_to "Sound settings", "/sounds", class: "dropdown-item btn", method: :get, type: "button"%></li>
                       <li><hr class="dropdown-divider"></li>
                       <li><%= button_to "Log out", session_path, method: :delete, class: "dropdown-item btn btn-lg"%></li>
                     </ul>
@@ -107,6 +108,28 @@
       </div>
     </div> 
 
+<audio id="wahwahwah" src="<%= asset_path('wahwahwah.mp3') %>"></audio>
+<audio id="sad_violin" src="<%= asset_path('sad_violin.mp3') %>"></audio>
+<audio id="spongebob-fail" src="<%= asset_path('spongebob-fail.mp3') %>"></audio>
+<audio id="si" src="<%= asset_path('si.mp3') %>"></audio>
+<audio id="done" src="<%= asset_path('done.mp3') %>"></audio>
+<audio id="beep" src="<%= asset_path('beep.mp3') %>"></audio>
+<audio id="coins" src="<%= asset_path('coins.mp3') %>"></audio>
+<audio id="oou" src="<%= asset_path('oou.mp3') %>"></audio>
+<audio id="piu" src="<%= asset_path('piu.mp3') %>"></audio>
+<audio id="wet" src="<%= asset_path('wet.mp3') %>"></audio>
+<audio id="accomplished" src="<%= asset_path('accomplished.mp3') %>"></audio>
+<audio id="ddd" src="<%= asset_path('ddd.mp3') %>"></audio>
+<audio id="elegant" src="<%= asset_path('elegant.mp3') %>"></audio>
+<audio id="error" src="<%= asset_path('error.mp3') %>"></audio>
+<audio id="p" src="<%= asset_path('p.mp3') %>"></audio>
+<audio id="smile-ringtone" src="<%= asset_path('smile-ringtone.mp3') %>"></audio>
+<audio id="swiftly" src="<%= asset_path('swiftly.mp3') %>"></audio>
+<audio id="system-fault" src="<%= asset_path('system-fault.mp3') %>"></audio>
+<audio id="yo" src="<%= asset_path('yo.mp3') %>"></audio>
+
+
+
 
     <footer>  
       <% if user_signed_in?%>
@@ -117,4 +140,11 @@
       <%end%>
     </footer>
   </body>
+
+<script>
+function play(option) {
+var audio_good = document.getElementById(option);
+audio_good.play();
+}
+</script>
 </html>

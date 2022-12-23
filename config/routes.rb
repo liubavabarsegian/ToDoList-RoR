@@ -12,6 +12,8 @@ Rails.application.routes.draw do
   get 'new', to: 'users#new'
   get '/users/:user_id', to: 'users#show'
   post 'choose_color', to: 'users#choose_color'
+  get 'sounds', to: 'users#sounds'
+  get 'save_sounds', to: 'users#save_sounds'
 
   get 'month', to: 'calendars#month'
   get 'week', to: 'calendars#week'

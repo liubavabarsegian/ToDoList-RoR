@@ -4,7 +4,7 @@
         <% @tasks.all.where(completed: true).order('completed_time DESC').reject{|task| task.completed_time.nil?}.each do |task| %>
           <% if task.completed_time.today? && @option == "today"|| task.completed_time.month == Date.today.month && @option == "month" || task.completed_time.to_date.cweek == Date.today.cweek && @option == "week"|| @option == "all"%>
             <div id="<%= dom_id task %>" class="task">
-            <%=button_to " ", uncomplete_path(:task => task), class: 'btn_instead_of_checkbox_return', onclick:"play_bad()"%>
+            <%=button_to " ", uncomplete_path(:task => task), class: 'btn_instead_of_checkbox_return', onclick:"play('#{current_user.failure_sound}')"%>
             <div style="text-decoration: line-through">
               <p>
                 <%= task.title %>

@@ -2,8 +2,8 @@
   <% if user_signed_in? && current_user.id == user.id%>
     <h1>My account</h1>
     <div style="display:flex;">
-      <%= link_to "Edit my account", edit_user_path(@user), class:'btn btn-primary' %>
-      <%= button_to "Delete my account", @user, method: :delete, data: {confirm: "Are you sure?"}, class: 'btn btn-danger' %>    
+      <%= link_to "Edit my account info", edit_user_path(@user), class:'btn btn-primary' %>
+      <%= button_to "Delete my account", @user,  data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'}, class: 'btn btn-danger' %>    
     </div>
     <p>
       <strong>Id:</strong>

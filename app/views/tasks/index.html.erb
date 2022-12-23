@@ -1,34 +1,3 @@
-<script>
-  function play_good() {
-    var audio_good = document.getElementById("si");
-    audio_good.play();
-  }
-  function play_bad() {
-    var audio_bad = document.getElementById("sad_violin");
-    audio_bad.play();
-  }
-</script>
-
-<audio id="wahwahwah" src="<%= asset_path('wahwahwah.mp3') %>"></audio>
-<audio id="sad_violin" src="<%= asset_path('sad_violin.mp3') %>"></audio>
-<audio id="spongebob-fail" src="<%= asset_path('spongebob-fail.mp3') %>"></audio>
-<audio id="si" src="<%= asset_path('si.mp3') %>"></audio>
-<audio id="done" src="<%= asset_path('done.mp3') %>"></audio>
-<audio id="beep" src="<%= asset_path('beep.mp3') %>"></audio>
-<audio id="coins" src="<%= asset_path('coins.mp3') %>"></audio>
-<audio id="oou" src="<%= asset_path('oou.mp3') %>"></audio>
-<audio id="piu" src="<%= asset_path('piu.mp3') %>"></audio>
-<audio id="wet" src="<%= asset_path('wet.mp3') %>"></audio>
-<audio id="accomplished" src="<%= asset_path('accomplished.mp3') %>"></audio>
-<audio id="ddd" src="<%= asset_path('ddd.mp3') %>"></audio>
-<audio id="elegant" src="<%= asset_path('elegant.mp3') %>"></audio>
-<audio id="error" src="<%= asset_path('error.mp3') %>"></audio>
-<audio id="p" src="<%= asset_path('p.mp3') %>"></audio>
-<audio id="smile-ringtone" src="<%= asset_path('smile-ringtone.mp3') %>"></audio>
-<audio id="swiftly" src="<%= asset_path('swiftly.mp3') %>"></audio>
-<audio id="system-fault" src="<%= asset_path('system-fault.mp3') %>"></audio>
-<audio id="yo" src="<%= asset_path('yo.mp3') %>"></audio>
-
 <% if user_signed_in?%>
   <p style="color: green"><%= notice %></p>
     <h1>Pending tasks</h1>
@@ -43,8 +12,7 @@
     <% @tasks.all.order('created_at DESC').each do |task| %>
       <% if task.completed == false%>
         <div id="<%= dom_id task %>" class="task">
-
-        <%=button_to " ", complete_path(task: task), class: 'btn_instead_of_checkbox', onclick:"play_good()"%> 
+        <%=button_to " ", complete_path(task: task), class: 'btn_instead_of_checkbox', onclick:"play('#{current_user.success_sound}')" %> 
         <p>
           <%= task.title %>
         </p>
@@ -89,7 +57,7 @@
         <% @tasks.all.where(completed: true).order('completed_time DESC').reject{|task| task.completed_time.nil?}.each do |task| %>
           <% if task.completed_time.today? && @option == "today"|| task.completed_time.month == Date.today.month && @option == "month" || task.completed_time.to_date.cweek == Date.today.cweek && @option == "week"|| @option == "all"%>
             <div id="<%= dom_id task %>" class="task">
-            <%=button_to " ", uncomplete_path(:task => task), class: 'btn_instead_of_checkbox_return', onclick:"play_bad()"%>
+            <%=button_to " ", uncomplete_path(:task => task), class: 'btn_instead_of_checkbox_return', onclick:"play('#{current_user.failure_sound}')"%>
             <div style="text-decoration: line-through">
               <p>
                 <%= task.title %>

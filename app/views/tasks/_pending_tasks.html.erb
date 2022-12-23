@@ -7,7 +7,7 @@
       <% if task.completed == false%>
         <div id="<%= dom_id task %>" class="task">
 
-        <%=button_to " ", complete_path(task: task), class: 'btn_instead_of_checkbox', onclick:"play_good()"%> 
+        <%=button_to " ", complete_path(task: task), class: 'btn_instead_of_checkbox', onclick:"play('#{current_user.success_sound}')"%> 
         <p>
           <%= task.title %>
         </p>

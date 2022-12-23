@@ -16,3 +16,8 @@
     margin: 30px 50px;
     font-size: 20px;
 }
+#success_radios
+{
+    display: flex;
+    flex-direction: column;
+}

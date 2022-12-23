@@ -2,7 +2,7 @@
 
 class UsersController < ApplicationController
   include UsersHelper
-  before_action :set_user, only: %i[show edit update destroy choose_color]
+  before_action :set_user, only: %i[show edit update destroy]
   # before_action :set_color, only: %i[show]
 
   # GET /users or /users.json
@@ -104,6 +104,18 @@ class UsersController < ApplicationController
   #     format.turbo_stream { render :choose_color } # renders `page.turbo_stream.erb`
   #   end
   # end
+  def sounds
+
+  end
+
+  def save_sounds
+    puts "aloha"
+    @user = User.find(current_user.id)
+    params.permit(:success_sound, :failure_sound)
+    @user.update_attribute(:success_sound, params[:success_sound])
+    @user.update_attribute(:failure_sound, params[:failure_sound])
+    redirect_to root_path
+  end
   private
 
   # Use callbacks to share common setup or constraints between actions.

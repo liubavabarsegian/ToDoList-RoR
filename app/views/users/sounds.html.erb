@@ -1,0 +1,70 @@
+<%= form_with(url: '/save_sounds', class: "form", method: :get) do |form| %>
+    <h1>Choose sound for task accomplishments </h1>
+    <div id = "succes_radios">
+        <%# !!params[:success_sound]  %>
+        <%= form.radio_button :success_sound, "si" , onclick:"play('si')" %>
+        <%= form.label :success_sound, "si", value:  "si" %><br />
+
+        <%= form.radio_button :success_sound, "coins", onclick:"play('coins')" %>
+        <%= form.label :success_sound, "coins", value:  "coins" %><br />
+
+        <%= form.radio_button :success_sound, "accomplished", onclick:"play('accomplished')" %>
+        <%= form.label :success_sound, "accomplished", value:  "accomplished" %><br />
+
+        <%= form.radio_button :success_sound, "beep", onclick:"play('beep')" %>
+        <%= form.label :success_sound, "beep", value:  "beep" %><br />
+
+        <%= form.radio_button :success_sound, "done", onclick:"play('done')" %>
+        <%= form.label :success_sound, "done", value:  "done" %><br />
+
+        <%= form.radio_button :success_sound, "elegant", onclick:"play('elegant')" %>
+        <%= form.label :success_sound, "elegant", value:  "elegant" %><br />
+
+        <%= form.radio_button :success_sound, "smile-ringtone", onclick:"play('smile-ringtone')" %>
+        <%= form.label :success_sound, "smile-ringtone", value:  "smile-ringtone" %><br />
+
+        <%= form.radio_button :success_sound, "swiftly", onclick:"play('swiftly')" %>
+        <%= form.label :success_sound, "swiftly", value:  "swiftly" %><br />
+
+        <%= form.radio_button :success_sound, "wet", onclick:"play('wet')" %>
+        <%= form.label :success_sound, "wet", value:  "wet" %><br />
+
+        <%= form.radio_button :success_sound, "yo", onclick:"play('yo')" %>
+        <%= form.label :success_sound, "yo", value:  "you" %><br />
+        
+    </div>
+    <h1>Choose sound for making task uncompleted</h1>
+    <div id = "failure_radios">
+        <%# !!params[:success_sound]  %>
+        <%= form.radio_button :failure_sound, "ddd" , onclick:"play('ddd')"%>
+        <%= form.label :failure_sound, "ddd", value:  "ddd"%><br />
+
+        <%= form.radio_button :failure_sound, "error", onclick:"play('error')" %>
+        <%= form.label :failure_sound, "error", value:  "error" %><br />
+
+        <%= form.radio_button :failure_sound, "oou", onclick:"play('oou')" %>
+        <%= form.label :failure_sound, "oou", value:  "oou" %><br />
+
+        <%= form.radio_button :failure_sound, "p", onclick:"play('p')" %>
+        <%= form.label :failure_sound, "p", value:  "p" %><br />
+
+        <%= form.radio_button :failure_sound, "piu", onclick:"play('piu')" %>
+        <%= form.label :failure_sound, "piu", value:  "piu" %><br />
+
+        <%= form.radio_button :failure_sound, "sad_violin", onclick:"play('sad_violin')" %>
+        <%= form.label :failure_sound, "sad_violin", value:  "sad_violin" %><br />
+
+        <%= form.radio_button :failure_sound, "spongebob-fail", onclick:"play('spongebob-fail')" %>
+        <%= form.label :failure_sound, "spongebob-fail", value:  "spongebob-fail" %><br />
+
+        <%= form.radio_button :failure_sound, "system-fault", onclick:"play('system-fault')" %>
+        <%= form.label :failure_sound, "system-fault", value:  "system-fault" %><br />
+
+        <%= form.radio_button :failure_sound, "wahwahwah", onclick:"play('wahwahwah')" %>
+        <%= form.label :failure_sound, "wahwahwah", value:  "wahwahwah" %><br />
+        
+    </div>
+    <div>
+        <%= form.submit "Save sounds", class: "btn btn-success btn-lg"%>
+    </div>
+<% end %>
