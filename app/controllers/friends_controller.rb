@@ -8,8 +8,11 @@ class FriendsController < ApplicationController
   end
 
   def send_request
+    puts "aloha"
     @user = User.find(friend_params[:user_id])
+    puts @user.id
     @friend = User.find(friend_params[:friend_id])
+    puts @friend.id
     if Friend.exists?(user_id: @user.id, friend_id: @friend.id) 
       @possible_friend = Friend.find_by(user_id: @user.id, friend_id: @friend.id)
     elsif Friend.exists?(friend_id: @user.id, user_id: @friend.id)
@@ -17,6 +20,7 @@ class FriendsController < ApplicationController
     else
       @possible_friend = Friend.create(friend_params)
     end
+    puts @possible_friend.id
     if @possible_friend.valid?
       @possible_friend.update_attribute(:sent_request, true)
       @possible_friend.update_attribute(:incoming_request, false)
@@ -27,13 +31,18 @@ class FriendsController < ApplicationController
   end
 
   def cancell_request
+    puts "cancell"
     @user = User.find(friend_params[:user_id])
+    puts @user.id
     @friend = User.find(friend_params[:friend_id])
+    puts @friend.id
     if Friend.exists?(user_id: @user.id, friend_id: @friend.id) 
       @pff_goodbye = Friend.find_by(user_id: @user.id, friend_id: @friend.id)
+      puts @pff_goodbye.id
       @pff_goodbye.delete
     elsif Friend.exists?(friend_id: @user.id, user_id: @friend.id)
       @pff_goodbye = Friend.find_by(friend_id: @user.id, user_id: @friend.id)
+      puts @pff_goodbye
       @pff_goodbye.delete
     end
     # @pff_goodbye.update_attribute(:sent_request, false)
@@ -46,13 +55,16 @@ class FriendsController < ApplicationController
 
   def accept_request
     @friend = Friend.where(friend_params)[0]
-    puts friend_params
+
     @friend.update_attribute(:sent_request, false)
     @friend.update_attribute(:incoming_request, false)
     @friend.update_attribute(:friendship, true)
   end
 
   def decline_request
+    @requests = Friend.all.where(friend_id: current_user.id, sent_request: true)
+    @loser = Friend.find_by(friend_params)
+    @loser.delete
   end
 
   def destroy_friendship

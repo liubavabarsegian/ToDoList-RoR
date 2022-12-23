@@ -1,0 +1,16 @@
+  <%if !@requests.empty?%>
+  <h1>New friend requests!</h1>
+    <% @requests.each do |request| %>
+      <div id="<%= dom_id request %>" class = "request">
+        <% @user = User.where(id: request.user_id)[0]%>
+        <p>
+          <strong>Nick:</strong>
+          <%= @user.nick %>
+        </p>
+        <div class = "buttons_near">
+          <%= render "friends/accept_request", locals: {friend_id: @user.id, user_id: current_user.id} %>
+          <%= render "friends/decline_request", locals: {friend_id: @user.id, user_id: current_user.id} %>
+        </div>
+      </div>
+    <% end %>
+<%end%>

@@ -3,12 +3,38 @@
     display: flex;
     font-size: 23px;
     justify-content: space-around;
-    background-color: rgb(190, 191, 224);
+    background-color: rgb(209, 211, 239);
     border-radius: 20px;
     margin: 20px 50px;
     padding: 5px;
 }
+.request
+{
+    display: flex;
+    font-size: 23px;
+    justify-content: space-around;
+    background-color: rgb(215, 231, 255);
+    border-radius: 20px;
+    margin: 20px 50px;
+}
+.request p
+{
+    margin-top: 1.5%;
+    position: relative;
+}
+#requests
+{
+    background-color: rgb(197, 214, 244);
+    padding: 50px;
+    margin: 20px 50px;
+    border-radius: 10px;
+}
 .friend:hover
+{
+    font-size: 25px;
+    margin: 18px 48px;
+}
+.request:hover
 {
     font-size: 25px;
     margin: 18px 48px;
@@ -32,4 +58,10 @@
     background-color: #8caae1;
     padding: 20px 50px;
     border-radius: 20px;
+}
+.buttons_near
+{
+    width: 350px;
+    display: flex;
+    justify-content: space-between;
 }

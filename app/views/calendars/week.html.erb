@@ -7,7 +7,6 @@
 
   <% task.each do |task| %>
   <div style= "display:flex;justify-content:space-between ">
-  <%if task.user_id == current_user.id%>
     <% if task.completed %>
       <div style="text-decoration: line-through">
         <%= task.title %>
@@ -17,7 +16,6 @@
         <%= task.title %>
       </div>
     <%end%>
-
     <a class="link" data-bs-toggle="modal" data-bs-target="#week<%= dom_id task %>">Open</a>
 
     <div class="modal fade" id="week<%= dom_id task %>" tabindex="-1" aria-labelledby="open_label" aria-hidden="true">
@@ -38,7 +36,6 @@
     </div> 
   </div>
   <% end %>
-  <%end%>
 <% end %>
 
 <img src = "<%= image_path('todonothing.png') %>" alt= "Tolstoy" id= "Tolstoy">

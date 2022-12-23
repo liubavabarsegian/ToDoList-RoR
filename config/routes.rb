@@ -1,6 +1,4 @@
 Rails.application.routes.draw do 
-  get 'competitions/friends'
-  get 'competitions/all_users'
   resources :tasks
   resource :session, only: %i[new create destroy]
   resources :sessions, only: %i[new create show]
@@ -25,6 +23,8 @@ Rails.application.routes.draw do
   post 'send_request' , to: 'friends#send_request'
   post 'cancell_request', to: 'friends#cancell_request'
   post 'accept_request', to: 'friends#accept_request'
+  post 'decline_request', to: 'friends#decline_request'
+  post 'destroy_friendship', to: 'friends#destroy_friendship'
   get 'friends', to: 'friends#index'
   
   get 'friends_competitions', to: "competitions#friends"

@@ -22,6 +22,11 @@
 
 } */
 
+.simple-calendar .future
+{
+    font-weight: 500;
+}
+
 .simple-calendar
 {
     background-color: rgb(199, 217, 255);
@@ -42,7 +47,7 @@
 .simple-calendar .prev-month, .simple-calendar .next-month 
 {
     font-style: italic;
-    background-color: rgb(225, 228, 232);
+    background-color: rgb(171, 193, 223);
 }
 
 
