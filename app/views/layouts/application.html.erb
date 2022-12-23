@@ -136,7 +136,7 @@
       <% if user_signed_in?%>
         <div id = "never_gonna_give_you_up">
           <h3>Don't click me!</h3>
-          <iframe width="110" height="100" src="https://www.myinstants.com/instant/click-here/embed/" frameborder="0" scrolling="no"></iframe>
+            <iframe onmouseover=show() onmouseout=dont_show() width="110" height="100" src="https://www.myinstants.com/instant/click-here/embed/" frameborder="0" scrolling="no"></iframe>
         </div>
       <%end%>
     </footer>
@@ -146,6 +146,14 @@
 function play(option) {
 var audio_good = document.getElementById(option);
 audio_good.play();
+}
+function show() {
+    var dance = document.getElementById('container');
+    dance.style.visibility='visible'
+}
+function dont_show() {
+  var dance = document.getElementById('container');
+  dance.style.visibility='hidden'
 }
 </script>
 </html>

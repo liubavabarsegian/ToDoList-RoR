@@ -62,12 +62,27 @@ class FriendsController < ApplicationController
   end
 
   def decline_request
+    @friend = Friend.where(friend_params)[0]
     @requests = Friend.all.where(friend_id: current_user.id, sent_request: true)
     @loser = Friend.find_by(friend_params)
     @loser.delete
   end
 
   def destroy_friendship
+    puts "cancell"
+    @user = User.find(friend_params[:user_id])
+    puts @user.id
+    @friend = User.find(friend_params[:friend_id])
+    
+    if Friend.exists?(user_id: @user.id, friend_id: @friend.id) 
+      @loser = Friend.find_by(user_id: @user.id, friend_id: @friend.id)
+      puts @loser.id
+      @loser.delete
+    elsif Friend.exists?(friend_id: @user.id, user_id: @friend.id)
+      @loser = Friend.find_by(friend_id: @user.id, user_id: @friend.id)
+      puts @loser
+      @loser.delete
+    end
   end
 
   private

@@ -6,6 +6,7 @@
     border-radius: 20px;
     padding: 10px;
     display: flex;
+    width: 700px;
 }
 .task:hover
 {
@@ -28,8 +29,12 @@ details {
     border-radius: 20px;
     padding: .5em .5em 0;
     margin: 20px 50px;
+    width: 700px;
 }
-
+details .task
+{
+  width: 600px;
+}
 summary {
     padding: 20px;
     font-size: 30px;
