@@ -1,0 +1,10 @@
+<div id="<%= dom_id @friend %>" class = "friend">
+    <% @user = User.where(id: @friend.user_id)[0]%>
+    <p>
+    <strong>Nick:</strong>
+    <%= @user.nick %>
+    </p>
+    <p>
+    <%= link_to "Show this friend", @user, class: 'link'%>
+</p>
+</div>

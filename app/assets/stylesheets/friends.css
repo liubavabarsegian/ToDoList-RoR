@@ -17,3 +17,19 @@
 {
     margin: 0px;
 }
+#add_friends
+{
+    width:20%;
+    margin-left:40%;
+    background-color: #97b2e4;
+    padding: 20px 50px;
+    border-radius: 20px;
+}
+#add_friends:hover
+{
+    width:22%;
+    margin-left:39%;
+    background-color: #8caae1;
+    padding: 20px 50px;
+    border-radius: 20px;
+}

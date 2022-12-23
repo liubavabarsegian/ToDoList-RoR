@@ -8,22 +8,37 @@ class FriendsController < ApplicationController
   end
 
   def send_request
-
-    @possible_friend = Friend.create(friend_params)
+    @user = User.find(friend_params[:user_id])
+    @friend = User.find(friend_params[:friend_id])
+    if Friend.exists?(user_id: @user.id, friend_id: @friend.id) 
+      @possible_friend = Friend.find_by(user_id: @user.id, friend_id: @friend.id)
+    elsif Friend.exists?(friend_id: @user.id, user_id: @friend.id)
+      @possible_friend = Friend.find_by(friend_id: @user.id, user_id: @friend.id)
+    else
+      @possible_friend = Friend.create(friend_params)
+    end
     if @possible_friend.valid?
       @possible_friend.update_attribute(:sent_request, true)
       @possible_friend.update_attribute(:incoming_request, false)
       @possible_friend.update_attribute(:friendship, false)
     else
-      #message about error
+        #message about error
     end
   end
 
   def cancell_request
-    @pff_goodbye = Friend.where(friend_params)[0]
-    @pff_goodbye.update_attribute(:sent_request, false)
-    @pff_goodbye.update_attribute(:incoming_request, false)
-    @pff_goodbye.update_attribute(:friendship, false)
+    @user = User.find(friend_params[:user_id])
+    @friend = User.find(friend_params[:friend_id])
+    if Friend.exists?(user_id: @user.id, friend_id: @friend.id) 
+      @pff_goodbye = Friend.find_by(user_id: @user.id, friend_id: @friend.id)
+      @pff_goodbye.delete
+    elsif Friend.exists?(friend_id: @user.id, user_id: @friend.id)
+      @pff_goodbye = Friend.find_by(friend_id: @user.id, user_id: @friend.id)
+      @pff_goodbye.delete
+    end
+    # @pff_goodbye.update_attribute(:sent_request, false)
+    # @pff_goodbye.update_attribute(:incoming_request, false)
+    # @pff_goodbye.update_attribute(:friendship, false)
   end
 
   def get_request
@@ -31,7 +46,6 @@ class FriendsController < ApplicationController
 
   def accept_request
     @friend = Friend.where(friend_params)[0]
-    puts "puta"
     puts friend_params
     @friend.update_attribute(:sent_request, false)
     @friend.update_attribute(:incoming_request, false)

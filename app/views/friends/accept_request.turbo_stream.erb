@@ -1,1 +1,3 @@
-
+<%= turbo_stream.prepend 'friends', partial: 'friend'%>
+<%= turbo_stream.remove "make_friends" %>
+<%= turbo_stream.update "requests"%>
