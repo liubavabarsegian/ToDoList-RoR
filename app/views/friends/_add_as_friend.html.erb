@@ -1,1 +1,1 @@
-<%= button_to "Add as friend", send_request_path(friend_id: @user.id, user_id: current_user.id), class: 'btn btn-outline-primary' %>
+<%= button_to "Add as friend", send_request_path(friend_1: current_user.id, friend_2: @user.id), class: 'btn btn-outline-primary' %>

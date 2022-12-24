@@ -2,6 +2,7 @@
 
 # class of controller
 class ApplicationController < ActionController::Base
+  include ApplicationHelper
   private
 
   def current_user

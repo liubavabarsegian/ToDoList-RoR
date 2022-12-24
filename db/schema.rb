@@ -15,14 +15,12 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_22_230647) do
   enable_extension "plpgsql"
 
   create_table "friends", force: :cascade do |t|
-    t.boolean "incoming_request", default: false
-    t.boolean "sent_request", default: false
-    t.boolean "friendship", default: false
-    t.integer "friend_id", null: false
+    t.boolean "friend_1", null: false
+    t.integer "friend_2", null: false
+    t.string "relationship"
+    t.integer "who_sent_request"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "user_id"
-    t.index ["user_id"], name: "index_friends_on_user_id"
   end
 
   create_table "tasks", force: :cascade do |t|

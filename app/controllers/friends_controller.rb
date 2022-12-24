@@ -1,95 +1,66 @@
 class FriendsController < ApplicationController
-  
+  include FriendsHelper
+
   def index
     redirect_to login_path unless user_signed_in?
 
-    @requests = Friend.all.where(friend_id: current_user.id, sent_request: true)
-    @friends = Friend.all.where(user_id: current_user.id, friendship: true) + Friend.all.where(friend_id: current_user.id, friendship: true)
+    @requests = requests
+    @friends = friends
   end
 
   def send_request
-    @requests = Friend.all.where(friend_id: current_user.id, sent_request: true)
-    puts "aloha"
-    @user = User.find(friend_params[:user_id])
-    puts @user.id
-    @friend = User.find(friend_params[:friend_id])
-    puts @friend.id
-    if Friend.exists?(user_id: @user.id, friend_id: @friend.id) 
-      @possible_friend = Friend.find_by(user_id: @user.id, friend_id: @friend.id)
-    elsif Friend.exists?(friend_id: @user.id, user_id: @friend.id)
-      @possible_friend = Friend.find_by(friend_id: @user.id, user_id: @friend.id)
-    else
-      @possible_friend = Friend.create(friend_params)
-    end
-    puts @possible_friend.id
+    @requests = requests
+    @friend_1 = User.find(friend_params[:friend_1])
+    @friend_2 = User.find(friend_params[:friend_2])
+    @possible_friend = Friend.create(friend_params)
+
     if @possible_friend.valid?
-      @possible_friend.update_attribute(:sent_request, true)
-      @possible_friend.update_attribute(:incoming_request, false)
-      @possible_friend.update_attribute(:friendship, false)
+      @possible_friend.update_attribute(:relationship, 'request')
+      @possible_friend.update_attribute(:who_sent_request, @friend_1.id)
     else
         #message about error
     end
   end
 
   def cancell_request
-    @requests = Friend.all.where(friend_id: current_user.id, sent_request: true)
-    puts "cancell"
-    @user = User.find(friend_params[:user_id])
-    puts @user.id
-    @friend = User.find(friend_params[:friend_id])
-    puts @friend.id
-    if Friend.exists?(user_id: @user.id, friend_id: @friend.id) 
-      @pff_goodbye = Friend.find_by(user_id: @user.id, friend_id: @friend.id)
-      puts @pff_goodbye.id
-      @pff_goodbye.delete
-    elsif Friend.exists?(friend_id: @user.id, user_id: @friend.id)
-      @pff_goodbye = Friend.find_by(friend_id: @user.id, user_id: @friend.id)
-      puts @pff_goodbye
-      @pff_goodbye.delete
-    end
-    # @pff_goodbye.update_attribute(:sent_request, false)
-    # @pff_goodbye.update_attribute(:incoming_request, false)
-    # @pff_goodbye.update_attribute(:friendship, false)
+    @requests = requests
+    @friend_1 = User.find(friend_params[:friend_1])
+    @friend_2 = User.find(friend_params[:friend_2])
+    @request = find_request(@friend_1, @friend_2)
+
+    @request.delete
   end
 
-  def get_request
-  end
+
 
   def accept_request
-    @requests = Friend.all.where(friend_id: current_user.id, sent_request: true)
-    @friend = Friend.where(friend_params)[0]
+    @requests = requests
+    @friend_1 = User.find(friend_params[:friend_1])
+    @friend_2 = User.find(friend_params[:friend_2])
+    @request = find_request(@friend_1, @friend_2)
 
-    @friend.update_attribute(:sent_request, false)
-    @friend.update_attribute(:incoming_request, false)
-    @friend.update_attribute(:friendship, true)
+    @request.update_attribute(:relationship, 'friendship')
   end
 
   def decline_request
-    @friend = Friend.where(friend_params)[0]
-    @requests = Friend.all.where(friend_id: current_user.id, sent_request: true)
-    @loser = Friend.find_by(friend_params)
+    @requests = requests
+    @friend_1 = User.find(friend_params[:friend_1])
+    @friend_2 = User.find(friend_params[:friend_2])
+    @loser = find_request(@friend_1, @friend_2)
+
     @loser.delete
   end
 
   def destroy_friendship
-    puts "cancell"
-    @user = User.find(friend_params[:user_id])
-    puts @user.id
-    @friend = User.find(friend_params[:friend_id])
-    
-    if Friend.exists?(user_id: @user.id, friend_id: @friend.id) 
-      @loser = Friend.find_by(user_id: @user.id, friend_id: @friend.id)
-      puts @loser.id
-      @loser.delete
-    elsif Friend.exists?(friend_id: @user.id, user_id: @friend.id)
-      @loser = Friend.find_by(friend_id: @user.id, user_id: @friend.id)
-      puts @loser
-      @loser.delete
-    end
+    @requests = requests
+    @friend_1 = User.find(friend_params[:friend_1])
+    @friend_2 = User.find(friend_params[:friend_2])
+    @loser = find_friend(second_user(@friend_1, @friend_2))
+    @loser.delete
   end
 
   private
   def friend_params
-    params.permit(:friend_id, :user_id)
+    params.permit(:friend_1, :friend_2)
   end
 end

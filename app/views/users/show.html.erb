@@ -3,11 +3,11 @@
 <p style="color: green"><%= notice %></p>
 <%if @user.id != current_user.id%>
         <div id = 'relationship_button'>
-        <%if !Friend.all.where(user_id: current_user.id, friend_id: @user.id, sent_request: true).empty?%>
+        <%if !Friend.all.where(friend_1: current_user.id, friend_2: @user.id, sent_request: true).empty?%>
                 <%= render "friends/request_is_sent", locals: {friend_id: @user.id, user_id: current_user.id}%>
-        <%elsif !Friend.all.where(user_id: current_user.id, friend_id: @user.id, incoming_request: true).empty?%>
+        <%elsif !Friend.all.where(friend_1: current_user.id, friend_id: @user.id, incoming_request: true).empty?%>
                 <%= render "friends/accept_request", locals: {friend_id: @user.id, user_id: current_user.id}%>
-        <%elsif !Friend.all.where(user_id: current_user.id, friend_id: @user.id, friendship: true).empty? || !Friend.all.where(friend_id: current_user.id, user_id: @user.id, friendship: true).empty? %>
+        <%elsif !Friend.all.where(friend_1: current_user.id, friend_id: @user.id, friendship: true).empty? || !Friend.all.where(friend_id: current_user.id, user_id: @user.id, friendship: true).empty? %>
                 <%= render "friends/destroy_friendship", locals: {friend_id: @user.id, user_id: current_user.id}%>
         <% else %>
                 <%= render "friends/add_as_friend", locals: {friend_id: @user.id, user_id: current_user.id}%>

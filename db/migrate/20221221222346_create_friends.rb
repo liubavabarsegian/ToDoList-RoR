@@ -1,10 +1,10 @@
 class CreateFriends < ActiveRecord::Migration[7.0]
   def change
     create_table :friends do |t|
-      t.boolean :incoming_request, default: false
-      t.boolean :sent_request, default: false
-      t.boolean :friendship, default: false
-      t.integer :friend_id, null: false
+      t.boolean :friend_1, null: false
+      t.integer :friend_2, null: false
+      t.string :relationship
+      t.integer :who_sent_request
       t.timestamps
     end
 
