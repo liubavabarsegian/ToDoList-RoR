@@ -27,6 +27,9 @@
       </div>
     <%else%>
       <div>
+        <%if date < Date.today()%>
+          <img src="<%=asset_path('over.png')%>" style="height:25px">
+        <%end%>
         <%= task.title %>
       </div>
     <%end%>

@@ -1,4 +1,4 @@
-<% if @tasks.where(completed: false).count.zero?%>
+    <% if @tasks.where(completed: false).count.zero?%>
           <p style="font-size:20px;text-align:center">All tasks are completed! Congratulations!</p>
           <img src = "<%= image_path('completed.jpg') %>" alt= "completed_image" style="width:25%;margin-left:37%">
     <%end%>
@@ -6,13 +6,24 @@
     <% @tasks.all.order('created_at DESC').each do |task| %>
       <% if task.completed == false%>
         <div id="<%= dom_id task %>" class="task">
+        <div class = "task_content">
+        <%=button_to " ", complete_path(task: task), class: 'btn_instead_of_checkbox', onclick:"play('#{current_user.success_sound}')" %> 
 
-        <%=button_to " ", complete_path(task: task), class: 'btn_instead_of_checkbox', onclick:"play('#{current_user.success_sound}')"%> 
+        <div class = "one_line">
         <p>
           <%= task.title %>
         </p>
 
         <a class="link" data-bs-toggle="modal" data-bs-target="#pending<%= dom_id task %>">Open</a>
+        </div>
+        </div>
+        <%unless task.due.nil?%>
+          <div>
+            <p class = "due_p" <%if task.due < Date.today()%> style="color:red"<%end%>><%if task.due < Date.today()%>
+                <img src="<%=asset_path('over.png')%>" style="height:25px">
+              <%end%>Due date: <%=task.due%></p>
+          </div>
+        <%end%>
 
         <div class="modal fade" id="pending<%= dom_id task %>" tabindex="-1" aria-labelledby="open_label" aria-hidden="true">
           <div class="modal-dialog  modal-xl">

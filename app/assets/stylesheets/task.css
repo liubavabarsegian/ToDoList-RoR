@@ -5,8 +5,21 @@
     background-color: rgb(219, 196, 254);
     border-radius: 20px;
     padding: 10px;
-    display: flex;
     width: 700px;
+}
+.task_content
+{
+  display: flex;
+}
+.task_content .one_line
+{
+  display: flex;
+  justify-content: space-between;
+}
+.task .due_p
+{
+  margin-left: 45px;
+  margin-top: 10px;
 }
 .task:hover
 {

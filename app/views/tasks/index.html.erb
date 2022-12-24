@@ -12,12 +12,24 @@
     <% @tasks.all.order('created_at DESC').each do |task| %>
       <% if task.completed == false%>
         <div id="<%= dom_id task %>" class="task">
+        <div class = "task_content">
         <%=button_to " ", complete_path(task: task), class: 'btn_instead_of_checkbox', onclick:"play('#{current_user.success_sound}')" %> 
+
+        <div class = "one_line">
         <p>
           <%= task.title %>
         </p>
 
         <a class="link" data-bs-toggle="modal" data-bs-target="#pending<%= dom_id task %>">Open</a>
+        </div>
+        </div>
+        <%unless task.due.nil?%>
+          <div>
+            <p class = "due_p" <%if task.due < Date.today()%> style="color:red"<%end%>><%if task.due < Date.today()%>
+                <img src="<%=asset_path('over.png')%>" style="height:25px">
+              <%end%>Due date: <%=task.due%></p>
+          </div>
+        <%end%>
 
         <div class="modal fade" id="pending<%= dom_id task %>" tabindex="-1" aria-labelledby="open_label" aria-hidden="true">
           <div class="modal-dialog  modal-xl">
@@ -57,13 +69,17 @@
         <% @tasks.all.where(completed: true).order('completed_time DESC').reject{|task| task.completed_time.nil?}.each do |task| %>
           <% if task.completed_time.today? && @option == "today"|| task.completed_time.month == Date.today.month && @option == "month" || task.completed_time.to_date.cweek == Date.today.cweek && @option == "week"|| @option == "all"%>
             <div id="<%= dom_id task %>" class="task">
+            <div class = "task_content">
             <%=button_to " ", uncomplete_path(:task => task), class: 'btn_instead_of_checkbox_return', onclick:"play('#{current_user.failure_sound}')"%>
-            <div style="text-decoration: line-through">
+              <div class = "one_line">
+              <div style="text-decoration: line-through">
               <p>
                 <%= task.title %>
               </p>
             </div>
             <a class="link" data-bs-toggle="modal" data-bs-target="#pending<%= dom_id task %>">Open</a>
+            </div>
+            </div>
             <div class="modal fade" id="pending<%= dom_id task %>" tabindex="-1" aria-labelledby="open_label" aria-hidden="true">
               <div class="modal-dialog  modal-xl">
                 <div class="modal-content">
