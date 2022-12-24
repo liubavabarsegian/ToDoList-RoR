@@ -81,3 +81,6 @@ gem "simple_calendar", "~> 2.4"
 gem 'sass-rails'
 gem "chartkick"
 gem "groupdate"
+gem 'whenever', require: false
+# gem 'font-awesome-less'
+# gem 'font-awesome-sass'

@@ -1,3 +1,4 @@
+
 <%=link_to "Week Calendar", week_path, type: "button", class: 'btn btn-primary'%>
 
 <%# <input id="toggle-on" class="toggle toggle-left" name="toggle" value="false" type="radio" checked>
@@ -15,7 +16,11 @@
 
 
   <% task.each do |task| %>
-  <div style= "display:flex;justify-content:space-between ">
+  <div class = "task_for_calendar">
+    <%# <label class="container">
+      <input type="checkbox" checked="checked">
+      <span class="checkmark"></span>
+    </label> %>
     <% if task.completed %>
       <div style="text-decoration: line-through">
         <%= task.title %>

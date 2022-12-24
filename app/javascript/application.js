@@ -4,6 +4,7 @@ import "controllers"
 import "chartkick"
 import "Chart.bundle"
 
+
 var reminder = document.getElementById("toggle");
 var reminder_time = document.getElementById("reminder_show");
 

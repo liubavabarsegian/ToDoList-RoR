@@ -8,6 +8,7 @@ class FriendsController < ApplicationController
   end
 
   def send_request
+    @requests = Friend.all.where(friend_id: current_user.id, sent_request: true)
     puts "aloha"
     @user = User.find(friend_params[:user_id])
     puts @user.id
@@ -31,6 +32,7 @@ class FriendsController < ApplicationController
   end
 
   def cancell_request
+    @requests = Friend.all.where(friend_id: current_user.id, sent_request: true)
     puts "cancell"
     @user = User.find(friend_params[:user_id])
     puts @user.id
@@ -54,6 +56,7 @@ class FriendsController < ApplicationController
   end
 
   def accept_request
+    @requests = Friend.all.where(friend_id: current_user.id, sent_request: true)
     @friend = Friend.where(friend_params)[0]
 
     @friend.update_attribute(:sent_request, false)
