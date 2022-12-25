@@ -30,4 +30,46 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  week_calendar: "Week Calendar"
+  month_calendar: "Month Calendar"
+  open_task: "Open"
+  task_label: "Task"
+  close_modal: "Close"
+
+  all_users_competitions: "Here you can see other users' progress and compare with yours"
+  compete_with_friends_button: "Show friends only"
+  all_friends_competitions: "Here you can see your friends' progress and compare with yours"
+  compete_with_all_friends_button: "Show all users"
+
+  accept_friendship_button: "Accept friendship"
+  add_as_friend_button: "Add as friend"
+  decline_request_button: "Decline request"
+  destroy_friendship: "Destroy friendship"
+
+  nick: "Nickname"
+  show_this_friend: "Show this friend"
+  request_is_sent_button: "Request is sent"
+  new_friend_requests: "New friend requests!"
+  friends: "Friends"
+  find_new_friends: "Find new friends"
+  make_friends: "Friends make out lives better! Add some friends!"
+
+  todo: "ToDo"
+  calendar: "Calendar"
+  my_friends: "My friends"
+  competitions: "Competitions"
+  my_account: "My account"
+  sound_settings: "Sound settings"
+  logout: "Log Out"
+  login: "Log In"
+  signup: "Sign Up"
+
+  new_task: "New task"
+  back_to_tasks: "Back to tasks"
+  dont_click_me: "Don't click on me!"
+
+  log_in_please: "Log in please"
+  email: "Email"
+  password: "Password"
+
+  no_completed_tasks: "You have no completed tasks yet."

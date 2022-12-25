@@ -1,5 +1,5 @@
         <% if @tasks.where(completed: true).count.zero?%>
-          <p>You have no completed tasks yet</p>
+          <p><%=t(:no_completed_tasks)%></p>
         <%end%>
         <% @tasks.all.where(completed: true).order('completed_time DESC').reject{|task| task.completed_time.nil?}.each do |task| %>
           <% if task.completed_time.today? && @option == "today"|| task.completed_time.month == Date.today.month && @option == "month" || task.completed_time.to_date.cweek == Date.today.cweek && @option == "week"|| @option == "all"%>

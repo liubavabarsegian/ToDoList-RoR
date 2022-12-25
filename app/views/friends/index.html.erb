@@ -4,12 +4,12 @@
 <%if !@requests.empty?%>
 <div id="requests">
   <div id = "requests_for_css">
-  <h1>New friend requests!</h1>
+  <h1><%=t(:new_friend_requests)%></h1>
     <% @requests.each do |request| %>
       <div id="<%= dom_id request %>" class = "request">
         <% @user = User.find(request.who_sent_request)%>
         <p>
-          <strong>Nick:</strong>
+          <strong><%=t(:nick)%></strong>
           <%= @user.nick %>
         </p>
         <div class = "buttons_near">
@@ -22,11 +22,11 @@
     </div>
 <%end%>
 
-<h1>Friends</h1>
-<%=link_to "See other users", users_path, class: 'btn btn-outline-primary'%>
+<h1><%=t(:friends)%></h1>
+<%=link_to t(:find_new_friends), users_path, class: 'btn btn-outline-primary'%>
 <%if @friends.empty?%>
   <div id = "make_friends">
-    <h1>Friends make our lives better! Add some friends here!</h1>
+    <h1><%=t(:make_friends)%></h1>
     <a href="<%=users_path%>">
       <img src = "<%= image_path('4friends.png') %>" alt= "add friends" id= "add_friends" >
     </a>
@@ -38,11 +38,11 @@
       <% @user = User.find(second_user(User.find(friend.friend_1), User.find(friend.friend_2)).id)%>
       <%=%>
       <p>
-        <strong>Nick:</strong>
+        <strong><%=t(:nick)%>: </strong>
         <%= @user.nick %>
       </p>
       <p>
-      <%= link_to "Show this friend", @user, class: 'link'%>
+      <%= link_to t(:show_this_friend), @user, class: 'link'%>
     </p>
     </div>
   <% end %>

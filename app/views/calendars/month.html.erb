@@ -1,10 +1,5 @@
 
-<%=link_to "Week Calendar", week_path, type: "button", class: 'btn btn-primary'%>
-
-<%# <input id="toggle-on" class="toggle toggle-left" name="toggle" value="false" type="radio" checked>
-<label for="toggle-on" class="btn">Week</label>
-<input id="toggle-off" class="toggle toggle-right" name="toggle" value="true" type="radio">
-<label for="toggle-off" class="btn">Month</label> %>
+<%=link_to t(:month_calendar), week_path, type: "button", class: 'btn btn-primary'%>
 
 
 <%= month_calendar(events: @tasks) do |date, task| %>
@@ -14,13 +9,8 @@
   </div>
 
 
-
   <% task.each do |task| %>
   <div class = "task_for_calendar">
-    <%# <label class="container">
-      <input type="checkbox" checked="checked">
-      <span class="checkmark"></span>
-    </label> %>
     <% if task.completed %>
       <div style="text-decoration: line-through">
         <%= task.title %>
@@ -33,20 +23,20 @@
         <%= task.title %>
       </div>
     <%end%>
-    <a class="link" data-bs-toggle="modal" data-bs-target="#month<%= dom_id task %>">Open</a>
+    <a class="link" data-bs-toggle="modal" data-bs-target="#month<%= dom_id task %>"><%=t(:open_task)%></a>
 
     <div class="modal fade" id="month<%= dom_id task %>" tabindex="-1" aria-labelledby="open_label" aria-hidden="true">
       <div class="modal-dialog  modal-xl">
         <div class="modal-content">
           <div class="modal-header">
-            <h4 class="modal-title" id="open_label">Task</h4>
+            <h4 class="modal-title" id="open_label"><%= t(:task_label)%></h4>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
           </div>
           <div class="modal-body">
             <%= render "tasks/task_show", task: task %>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><%=t(:close_modal)%></button>
           </div>
         </div>
       </div>

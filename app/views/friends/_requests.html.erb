@@ -1,11 +1,11 @@
 
   <%if !@requests.empty?%>
-  <h1>New friend requests!</h1>
+  <h1><%= t(:new_friend_requests)%></h1>
     <% @requests.each do |request| %>
       <div id="<%= dom_id request %>" class = "request">
         <% @user = User.find(request.who_sent_request)%>
         <p>
-          <strong>Nick:</strong>
+          <strong><%=t(:nick)%></strong>
           <%= @user.nick %>
         </p>
         <div class = "buttons_near">

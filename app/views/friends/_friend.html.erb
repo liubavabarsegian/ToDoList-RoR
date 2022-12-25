@@ -1,10 +1,10 @@
 <div id="<%= dom_id @friendship %>" class = "friend">
     <% @user = User.find(second_user(@friendship.friend_1, @friendship.friend_2))%>
     <p>
-    <strong>Nick:</strong>
+    <strong><%=t(:nick)%>:</strong>
     <%= @user.nick %>
     </p>
     <p>
-    <%= link_to "Show this friend", @user, class: 'link'%>
+    <%= link_to t(:show_this_friend), @user%>
 </p>
 </div>

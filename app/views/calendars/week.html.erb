@@ -1,4 +1,4 @@
-<%=link_to "Month Calendar", month_path, type: "button", class: 'btn btn-primary'%>
+<%=link_to t(:week_calendar), month_path, type: "button", class: 'btn btn-primary'%>
 <%= week_calendar(events: @tasks) do |date, task| %>
   <div style="display: flex;justify-content:space-between">
     <%= date %>
@@ -6,30 +6,33 @@
   </div>
 
   <% task.each do |task| %>
-  <div style= "display:flex;justify-content:space-between ">
+  <div class = "task_for_calendar">
     <% if task.completed %>
       <div style="text-decoration: line-through">
         <%= task.title %>
       </div>
     <%else%>
       <div>
+        <%if date < Date.today()%>
+          <img src="<%=asset_path('over.png')%>" style="height:25px">
+        <%end%>
         <%= task.title %>
       </div>
     <%end%>
-    <a class="link" data-bs-toggle="modal" data-bs-target="#week<%= dom_id task %>">Open</a>
+    <a class="link" data-bs-toggle="modal" data-bs-target="#month<%= dom_id task %>"><%=t(:open_task)%></a>
 
-    <div class="modal fade" id="week<%= dom_id task %>" tabindex="-1" aria-labelledby="open_label" aria-hidden="true">
+    <div class="modal fade" id="month<%= dom_id task %>" tabindex="-1" aria-labelledby="open_label" aria-hidden="true">
       <div class="modal-dialog  modal-xl">
         <div class="modal-content">
           <div class="modal-header">
-            <h4 class="modal-title" id="open_label">Task</h4>
+            <h4 class="modal-title" id="open_label"><%= t(:task_label)%></h4>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
           </div>
           <div class="modal-body">
             <%= render "tasks/task_show", task: task %>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><%=t(:close_modal)%></button>
           </div>
         </div>
       </div>

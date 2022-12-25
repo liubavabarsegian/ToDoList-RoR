@@ -1,2 +1,45 @@
 ru:
-  hello: "Всем привет"
+  week_calendar: "Неделя"
+  month_calendar: "Месяц"
+
+  open_task: "Открыть"
+  task_label: "Задача"
+  close_modal: "Закрыть"
+
+  all_users_competitions: "Здесь вы можете сравнить свой прогресс с другими пользователями"
+  compete_with_friends_button: "Показать только моих друзей"
+  all_friends_competitions: "Здесь вы можете сравнить свой прогресс с друзьями"
+  compete_with_all_friends_button: "Показать всех пользователей"
+
+  accept_friendship_button: "Принять заявку"
+  add_as_friend_button: "Добавить в друзья"
+  decline_request_button: "Отклонить заявку"
+  destroy_friendship: "Удалить от друзей"
+
+  nick: "Кликуха"
+  show_this_friend: "Показать профиль друга"
+  request_is_sent_button: "Запрос отправлен"
+  new_friend_requests: "Новые заявки в друзья!"
+  friends: "Друзья"
+  find_new_friends: "Найти новых друзей"
+  make_friends: "Друзья делают нашу жизнь ярче! Добавьте друзей!"
+
+  todo: "ТуДу"
+  calendar: "Календарь"
+  my_friends: "Мои друзья"
+  competitions: "Соревновалки"
+  my_account: "Мой профиль"
+  sound_settings: "Настройки звуков"
+  logout: "Выход"
+  login: "Вход"
+  signup: "Регистрация"
+
+  new_task: "Новая задача"
+  back_to_tasks: "Вернуться к задачам"
+  dont_click_me: "Не нажимай на меня!"
+
+  log_in_please: "Войдите, пожалуйста"
+  email: "Почта"
+  password: "Пароль"
+
+  no_completed_tasks: "У вас пока нет выполненных задач"
