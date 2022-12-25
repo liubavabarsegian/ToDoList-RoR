@@ -3,6 +3,15 @@
 # class of controller
 class ApplicationController < ActionController::Base
   include ApplicationHelper
+  
+  class ApplicationController < ActionController::Base
+    around_action :switch_locale
+    def switch_locale(&action)
+      locale = params[:locale] || I18n.default_locale
+      I18n.with_locale(locale, &action)
+    end
+  end
+
   private
 
   def current_user

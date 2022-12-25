@@ -1,22 +1,18 @@
 class CompetitionsController < ApplicationController
-  def friend?(user)
-    !Friend.all.where(friendship:true, friend_id: current_user.id).select{|friend| friend.user_id == user}.empty? || !Friend.all.where(friendship: true, user_id: current_user.id).select{|friend| friend.friend_id == user}.empty?
-  end
+  include FriendsHelper
+
+
 
   def friends
     redirect_to login_path unless user_signed_in?
     if user_signed_in?
-      puts "ddd"
-      @completed_tasks = Task.where(completed: true).select{|task| friend?(task.user_id)}.group_by(&:user_id)
-      # @friends = Friend.all.where(user_id: current_user.id, friendship: true) + Friend.all.where(friend_id: current_user.id, friendship: true)
-      @completed_tasks = Task.where(completed: true).group(:user_id).order("count(user_id) DESC")
+      arr = Task.where(completed: true).select{|task| User.find(task.user_id).is_friend?(current_user)}
+      @completed_tasks =  Task.where(id: arr.map(&:id)).group(:user_id)
     end
   end
 
   def all_users
-    
+    table_name = Task.arel_table
     @completed_tasks = Task.where(completed: true).group(:user_id)
-    puts "1111"
-    puts @completed_tasks.class
   end
 end

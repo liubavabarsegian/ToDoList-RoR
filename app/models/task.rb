@@ -8,4 +8,5 @@ class Task < ApplicationRecord
   def start_time
     due
   end
+
 end

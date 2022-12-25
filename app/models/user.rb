@@ -20,10 +20,15 @@ class User < ApplicationRecord
     save!(validate: false)
   end
 
+  def is_friend?(user)
+    !Friend.where(friend_1: self.id, friend_2: user.id).or(Friend.where(friend_1:  user.id, friend_2: self.id)).where(relationship: 'friendship').empty?
+  end
+  
   private
 
   def confirmation_token
     self.confirm_token = SecureRandom.urlsafe_base64.to_s if confirm_token.blank?
   end
   
+
 end
