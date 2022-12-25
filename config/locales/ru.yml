@@ -43,3 +43,23 @@ ru:
   password: "Пароль"
 
   no_completed_tasks: "У вас пока нет выполненных задач"
+  title: "Название"
+  description: "Описание"
+  due: "Крайний срок"
+  id: "ID пользователя"
+  completed: "Выполнено"
+  save_task: "Добавить задачу"
+  true: "Да"
+  false: "Нет"
+  all_tasks_are_completed: "Все задачи выполнены! Поздравляем!"
+  edit_task: "Редактировать задачу"
+  destroy_task: "Удалить задачу"
+  editing_task: "Редактирование задачи"
+  completed_tasks: "Выполненные задачи"
+
+  today: "сегодня"
+  this_week: "на этой неделе"
+  this_month: "в этом месяце"
+  all: "за все время"
+  show: "показать"
+

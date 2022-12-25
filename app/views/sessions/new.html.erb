@@ -1,9 +1,9 @@
 <div class = "main-login">
 
-  <h1><%=t(:log_in_please)%></h1>
+  <h1><%= t(:log_in_please)%></h1>
   <%= form_with(url: session_path,class: "form", id: "login-form")  do |form| %>
   <div>
-    <%= form.label t(:emal), style: "display: block" %>
+    <%= form.label t(:email), style: "display: block" %>
     <%= form.text_field :email, class: "form-control", id: "li-email", type: "email"  %>
   </div>
 

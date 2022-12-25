@@ -1,104 +1,22 @@
 <% if user_signed_in?%>
   <p style="color: green"><%= notice %></p>
-    <%= link_to "New task", new_task_path, type:"button", id: "btn-add", class: "btn glow-on-hover", style:'color:white;font-size:25px' %>
+    <%= link_to t(:new_task), new_task_path, type:"button", id: "btn-add", class: "btn glow-on-hover", style:'color:white;font-size:20px' %>
     <br/>
     <div id="pending-tasks">
-    <% if @tasks.where(completed: false).count.zero?%>
-          <p style="font-size:20px;text-align:center">All tasks are completed! Congratulations!</p>
-          <img src = "<%= image_path('completed.jpg') %>" alt= "completed_image" style="width:25%;margin-left:37%">
-    <%end%>
-    
-    <% @tasks.all.order('created_at DESC').each do |task| %>
-      <% if task.completed == false%>
-        <div id="<%= dom_id task %>" class="task">
-        <div class = "task_content">
-        <%=button_to " ", complete_path(task: task), class: 'btn_instead_of_checkbox', onclick:"play('#{current_user.success_sound}')" %> 
-
-        <div class = "one_line">
-        <p>
-          <%= task.title %>
-        </p>
-
-        <a class="link" data-bs-toggle="modal" data-bs-target="#pending<%= dom_id task %>">Open</a>
-        </div>
-        </div>
-        <%unless task.due.nil?%>
-          <div>
-            <p class = "due_p" <%if task.due < Date.today()%> style="color:red"<%end%>><%if task.due < Date.today()%>
-                <img src="<%=asset_path('over.png')%>" style="height:25px">
-              <%end%>Due date: <%=task.due%></p>
-          </div>
-        <%end%>
-
-        <div class="modal fade" id="pending<%= dom_id task %>" tabindex="-1" aria-labelledby="open_label" aria-hidden="true">
-          <div class="modal-dialog  modal-xl">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h4 class="modal-title" id="open_label">Task</h4>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
-              </div>
-              <div class="modal-body">
-                <%= render "task_show", task: task %>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
-              </div>
-            </div>
-          </div>
-        </div> 
-
-        </div>
-      <%end%>  
-    <% end %>
+    <%= render "pending_tasks"%>
   </div>
 
     <details >
       <summary>
-      Completed tasks
-      <%= form_with url: "/choose", method: :post, id: 'options'  do |form|%>
-        <%= form.select :option, [["today", "today"], ["this week", "week"], ["this month", "month"], ["all the time", "all"]], selected: @option, onchange: 'this.form.submit()' %>
-        <%= form.submit 'show', class: 'btn btn-outline-primary'%>
+      <%=t(:completed_tasks)%>
+      <%= form_with url: "/choose", method: :post, id: 'options' do |form|%>
+        <%= form.select :option, [["#{t(:today)}", "today"], ["#{t(:this_week)}", "week"], ["#{t(:this_month)}", "month"], ["#{t(:all)}", "all"]],  {}, { class: "form form-group form-control" }  %>
+        <%= form.submit t(:show), class: 'btn btn-outline-primary'%>
       <% end %>
       
       </summary>
       <div id="completed-tasks">
-        <% if @tasks.where(completed: true).count.zero?%>
-          <p>You have no completed tasks yet</p>
-        <%end%>
-        <% @tasks.all.where(completed: true).order('completed_time DESC').reject{|task| task.completed_time.nil?}.each do |task| %>
-          <% if task.completed_time.today? && @option == "today"|| task.completed_time.month == Date.today.month && @option == "month" || task.completed_time.to_date.cweek == Date.today.cweek && @option == "week"|| @option == "all"%>
-            <div id="<%= dom_id task %>" class="task">
-            <div class = "task_content">
-            <%=button_to " ", uncomplete_path(:task => task), class: 'btn_instead_of_checkbox_return', onclick:"play('#{current_user.failure_sound}')"%>
-              <div class = "one_line">
-              <div style="text-decoration: line-through">
-              <p>
-                <%= task.title %>
-              </p>
-            </div>
-            <a class="link" data-bs-toggle="modal" data-bs-target="#pending<%= dom_id task %>">Open</a>
-            </div>
-            </div>
-            <div class="modal fade" id="pending<%= dom_id task %>" tabindex="-1" aria-labelledby="open_label" aria-hidden="true">
-              <div class="modal-dialog  modal-xl">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h4 class="modal-title" id="open_label">Task</h4>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
-                  </div>
-                  <div class="modal-body">
-                    <%= render "task_show", task: task %>
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          
-          </div>
-          <%end%>  
-        <% end %>
+        <%= render "completed_tasks"%>
       </div>
     </details>
 

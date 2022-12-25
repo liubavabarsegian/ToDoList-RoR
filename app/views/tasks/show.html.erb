@@ -1,21 +1,20 @@
 <p style="color: green"><%= notice %></p>
 
-<strong>Title:</strong>
+<strong><%=t(:title)%>:</strong>
 <%= @task.title %>
 <br/>
-<strong>Due:</strong>
+<strong><%=t(:due)%>:</strong>
 <%= @task.due %>
 <% if user_signed_in?%>
-  <strong>User id:</strong>
+  <strong><%=t(:id)%>:</strong>
   <%= @task.user_id %>
 <%end%>
-<strong>Completed:</strong>
+<strong><%=t(:completed)%>:</strong>
 <%= @task.completed %>
 
 <div>
-  <%= link_to "Edit this task", edit_task_path(@task) %> |
-  <%= link_to "Back to tasks", tasks_path %>
- 
+  <%= link_to t(:edit_task), edit_task_path(@task) %> |
+  <%= link_to t(:back_to_tasks), tasks_path %>
 
-  <%= button_to "Destroy this task", @task, method: :delete %>
+  <%= button_to t(:destroy_task) :delete %>
 </div>

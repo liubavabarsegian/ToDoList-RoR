@@ -12,33 +12,22 @@
   <% end %>
 
   <div>
-    <%= form.label :title, style: "display: block" %>
+    <%= form.label t(:title), style: "display: block" %>
     <%= form.text_field :title, class: 'form-control' %>
   </div>
 
   <div>
-    <%= form.label :description, style: "display: block" %>
+    <%= form.label t(:description), style: "display: block" %>
     <%= form.text_field :description, class: 'form-control' %>
   </div>
 
   <div>
-    <%= form.label :due, style: "display: block" %>
+    <%= form.label t(:due), style: "display: block" %>
     <%= form.date_field :due, id: "due-input", class: 'input-group date'%>
   </div>
 
-  <div id = "reminder-div">
-    <%= form.label "Set a reminder", style: "display: block"%>
-    <%= form.check_box :reminder, id: "toggle" %>
-    <label id = "reminder-label" for="toggle"></label>
-  </div>
-
-  <div id = "reminder_show" style="visibility: hidden">
-    <%= form.label :reminder_time, style: "display: block" %>
-    <%= form.time_field :reminder_time %>
-  </div>
-
   <div>
-    <%= form.submit "Save Task", class: "btn btn-success btn-lg" %>
+    <%= form.submit t(:save_task), class: "btn btn-success btn-lg" %>
   </div>
 <% end %>
 

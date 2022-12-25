@@ -1,5 +1,5 @@
     <% if @tasks.where(completed: false).count.zero?%>
-          <p style="font-size:20px;text-align:center">All tasks are completed! Congratulations!</p>
+          <p style="font-size:20px;text-align:center"><%=t(:all_tasks_are_completed)%></p>
           <img src = "<%= image_path('completed.jpg') %>" alt= "completed_image" style="width:25%;margin-left:37%">
     <%end%>
     
@@ -14,14 +14,14 @@
           <%= task.title %>
         </p>
 
-        <a class="link" data-bs-toggle="modal" data-bs-target="#pending<%= dom_id task %>">Open</a>
+        <a class="link" data-bs-toggle="modal" data-bs-target="#pending<%= dom_id task %>"><%=t(:open_task)%></a>
         </div>
         </div>
         <%unless task.due.nil?%>
           <div>
             <p class = "due_p" <%if task.due < Date.today()%> style="color:red"<%end%>><%if task.due < Date.today()%>
                 <img src="<%=asset_path('over.png')%>" style="height:25px">
-              <%end%>Due date: <%=task.due%></p>
+              <%end%><%=t(:due)%>: <%=task.due%></p>
           </div>
         <%end%>
 
@@ -29,14 +29,14 @@
           <div class="modal-dialog  modal-xl">
             <div class="modal-content">
               <div class="modal-header">
-                <h4 class="modal-title" id="open_label">Task</h4>
+                <h4 class="modal-title" id="open_label"><%=t(:task_label)%></h4>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
               </div>
               <div class="modal-body">
                 <%= render "task_show", task: task %>
               </div>
               <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><%=t(:close_modal)%></button>
               </div>
             </div>
           </div>

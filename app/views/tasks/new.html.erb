@@ -1,48 +1,5 @@
-<h1>New task</h1>
-<%= form_with(model: @task, class: 'form') do |form| %>
-  <% if @task.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(@task.errors.count, "error") %> prohibited this task from being saved:</h2>
-
-      <ul>
-        <% @task.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div>
-    <%= form.label :title, style: "display: block" %>
-    <%= form.text_field :title, class: 'form-control' %>
-  </div>
-
-  <div>
-    <%= form.label :description, style: "display: block" %>
-    <%= form.text_area :description, class: 'form-control', style: "height: 100px" %>
-  </div>
-
-  <div>
-    <%= form.label :due, style: "display: block" %>
-    <%= form.date_field :due, id: "due-input", class: 'input-group date' %>
-  </div>
-
-  <div id = "reminder-div">
-    <%= form.label "Set a reminder", style: "display: block"%>
-    <%= form.check_box :reminder, id: "toggle" %>
-    <label id = "reminder-label" for="toggle"></label>
-  </div>
-
-  <div id = "reminder_show" style="visibility: hidden">
-    <%= form.label :reminder_time, style: "display: block" %>
-    <%= form.time_field :reminder_time %>
-  </div>
-
-  <div>
-    <%= form.submit "Save Task", class: "btn btn-success btn-lg" %>
-  </div>
-<% end %>
-<br>
+<h1><%=t(:new_task)%></h1>
+<%= render "form"%>
 <div>
   <%= link_to "Back to tasks", tasks_path, class: 'btn btn-outline-secondary' %>
 </div>
