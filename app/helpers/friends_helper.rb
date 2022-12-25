@@ -12,7 +12,7 @@ module FriendsHelper
     end
 
     def find_friend(user2)
-        Frind.where(friend_1: current_user.id, friend_2: user2.id).or(Frind.where(friend_1: current_user.id, friend_2: user2.id)).where(relationship: 'friendship').first
+        Friend.where(friend_1: current_user.id, friend_2: user2.id).or(Friend.where(friend_2: current_user.id, friend_1: user2.id)).where(relationship: 'friendship').first
     end
 
     def find_request(from, to)
@@ -24,7 +24,5 @@ module FriendsHelper
         return user2 if user2 != current_user
     end
 
-    def friend?(user1)
-        
-    end
+
 end

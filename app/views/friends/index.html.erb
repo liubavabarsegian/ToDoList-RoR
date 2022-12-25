@@ -3,6 +3,7 @@
 
 <%if !@requests.empty?%>
 <div id="requests">
+  <div id = "requests_for_css">
   <h1>New friend requests!</h1>
     <% @requests.each do |request| %>
       <div id="<%= dom_id request %>" class = "request">
@@ -17,6 +18,7 @@
         </div>
       </div>
     <% end %>
+    </div>
     </div>
 <%end%>
 
@@ -33,7 +35,8 @@
 <div id="friends">
   <% @friends.each do |friend| %>
     <div id="<%= dom_id friend %>" class = "friend">
-      <% @user = User.find(other_user(friend.friend_1, friend.friend_2))%>
+      <% @user = User.find(second_user(User.find(friend.friend_1), User.find(friend.friend_2)).id)%>
+      <%=%>
       <p>
         <strong>Nick:</strong>
         <%= @user.nick %>
