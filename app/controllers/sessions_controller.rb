@@ -32,7 +32,7 @@ class SessionsController < ApplicationController
   def destroy
     redirect_to login_path unless user_signed_in?
     return unless user_signed_in?
-    
+
     puts 'USERS IS SIGNED IN' if user_signed_in?
     puts 'USER IS NOT SIGNED IN' unless user_signed_in?
     session.delete :user_id

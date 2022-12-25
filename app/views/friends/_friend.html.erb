@@ -1,5 +1,5 @@
 <div id="<%= dom_id @friendship %>" class = "friend">
-    <% @user = User.find(second_user(@friendship.friend_1, @friendship.friend_2))%>
+    <% @user = User.find(second_user(@friendship.friend1, @friendship.friend2))%>
     <p>
     <strong><%=t(:nick)%>:</strong>
     <%= @user.nick %>

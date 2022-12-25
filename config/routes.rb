@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
   resources :tasks
   resource :session, only: %i[new create destroy]
@@ -19,21 +21,20 @@ Rails.application.routes.draw do
   post '/complete', to: 'tasks#complete'
   post '/uncomplete', to: 'tasks#uncomplete'
   post '/choose', to: 'tasks#choose'
-  
-  post 'send_request' , to: 'friends#send_request'
+
+  post 'send_request', to: 'friends#send_request'
   post 'cancell_request', to: 'friends#cancell_request'
   post 'accept_request', to: 'friends#accept_request'
   post 'decline_request', to: 'friends#decline_request'
   post 'destroy_friendship', to: 'friends#destroy_friendship'
   get 'friends', to: 'friends#index'
-  
-  get 'friends_competitions', to: "competitions#friends"
-  get 'all_competitions', to: "competitions#all_users"
+
+  get 'friends_competitions', to: 'competitions#friends'
+  get 'all_competitions', to: 'competitions#all_users'
 
   resources :users do
     member do
       get :confirm_email
     end
   end
-
 end

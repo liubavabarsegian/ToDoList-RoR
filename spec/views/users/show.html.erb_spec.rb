@@ -1,17 +1,19 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-RSpec.describe "users/show", type: :view do
+RSpec.describe 'users/show', type: :view do
   before(:each) do
     assign(:user, User.create!(
-      nick: "Nick",
-      name: "Name",
-      surname: "Surname",
-      email: "Email",
-      password: "Password"
-    ))
+                    nick: 'Nick',
+                    name: 'Name',
+                    surname: 'Surname',
+                    email: 'Email',
+                    password: 'Password'
+                  ))
   end
 
-  it "renders attributes in <p>" do
+  it 'renders attributes in <p>' do
     render
     expect(rendered).to match(/Nick/)
     expect(rendered).to match(/Name/)

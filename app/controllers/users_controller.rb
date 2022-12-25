@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# users
 class UsersController < ApplicationController
   include UsersHelper
   include FriendsHelper
@@ -15,10 +16,9 @@ class UsersController < ApplicationController
   # GET /users/1 or /users/1.json
   def show
     redirect_to login_path unless user_signed_in?
-    if user_signed_in?
-      @pending_tasks = Task.where(user_id: @user.id, completed: false)
-      @completed_tasks = Task.where(user_id: @user.id, completed: true)
-    end
+
+    @pending_tasks = Task.where(user_id: @user.id, completed: false)
+    @completed_tasks = Task.where(user_id: @user.id, completed: true)
   end
 
   # GET /users/new
@@ -69,7 +69,6 @@ class UsersController < ApplicationController
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
-
   end
 
   # DELETE /users/1 or /users/1.json
@@ -82,19 +81,17 @@ class UsersController < ApplicationController
     end
   end
 
-
-  def sounds
-
-  end
+  def sounds; end
 
   def save_sounds
-    puts "aloha"
+    puts 'aloha'
     @user = User.find(current_user.id)
     params.permit(:success_sound, :failure_sound)
     @user.update_attribute(:success_sound, params[:success_sound])
     @user.update_attribute(:failure_sound, params[:failure_sound])
     redirect_to root_path
   end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.

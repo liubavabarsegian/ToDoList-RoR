@@ -9,8 +9,8 @@
           <%= @user.nick %>
         </p>
         <div class = "buttons_near">
-          <%= render "friends/accept_request", locals: {friend_2: @user.id, friend_1: current_user.id} %>
-          <%= render "friends/decline_request", locals: {friend_2: @user.id, friend_1: current_user.id} %>
+          <%= render "friends/accept_request", locals: {friend2: @user.id, friend1: current_user.id} %>
+          <%= render "friends/decline_request", locals: {friend2: @user.id, friend1: current_user.id} %>
         </div>
       </div>
     <% end %>

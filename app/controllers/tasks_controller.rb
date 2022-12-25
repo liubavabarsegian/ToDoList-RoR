@@ -1,15 +1,16 @@
 # frozen_string_literal: true
 
+# tasks
 class TasksController < ApplicationController
   before_action :set_task, only: %i[show edit update destroy]
-  # after_action :set_option, only: %i[index]
 
   # GET /tasks or /tasks.json
   def index
     @tasks = Task.all
     redirect_to login_path unless user_signed_in?
     return unless user_signed_in?
-    @option = "today"
+
+    @option = 'today'
     @tasks = Task.all.where(user_id: current_user.id)
     @pending_tasks = Task.where(user_id: current_user.id).count
   end
@@ -21,6 +22,7 @@ class TasksController < ApplicationController
   def new
     redirect_to login_path unless user_signed_in?
     return unless user_signed_in?
+
     @task = Task.new
   end
 
@@ -39,7 +41,7 @@ class TasksController < ApplicationController
 
     respond_to do |format|
       if @task.save
-        format.html {redirect_to root_path, notice: 'Task was successfully created.' }
+        format.html { redirect_to root_path, notice: 'Task was successfully created.' }
         # format.json { render :show, status: :created, location: @task }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -85,7 +87,7 @@ class TasksController < ApplicationController
     @task = Task.find(params[:task])
     @task.update_attribute(:completed, true)
     @task.update_attribute(:completed_time, DateTime.now)
-    @option = "today"
+    @option = 'today'
 
     respond_to do |format|
       format.html         { render :complete } # renders `page.html.erb`
@@ -101,8 +103,8 @@ class TasksController < ApplicationController
     @task = Task.find(params[:task])
     @task.update_attribute(:completed, false)
     @task.update_attribute(:completed_time, nil)
-    
-    @option = "today"
+
+    @option = 'today'
     respond_to do |format|
       format.html         { render :uncomplete } # renders `page.html.erb`
       format.turbo_stream { render :uncomplete } # renders `page.turbo_stream.erb`
@@ -137,5 +139,4 @@ class TasksController < ApplicationController
   def page_params
     params.permit(:option)
   end
-
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateFriends < ActiveRecord::Migration[7.0]
   def change
     create_table :friends do |t|
@@ -7,7 +9,5 @@ class CreateFriends < ActiveRecord::Migration[7.0]
       t.integer :who_sent_request
       t.timestamps
     end
-
-    
   end
 end

@@ -1,5 +1,7 @@
-class Friend < ApplicationRecord
-    # belongs_to :user
+# frozen_string_literal: true
 
-    validates :friend_1, :friend_2, presence: true
+class Friend < ApplicationRecord
+  # belongs_to :user
+
+  validates :friend_1, :friend_2, presence: true
 end

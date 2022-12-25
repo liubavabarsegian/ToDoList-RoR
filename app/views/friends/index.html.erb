@@ -13,8 +13,8 @@
           <%= @user.nick %>
         </p>
         <div class = "buttons_near">
-          <%= render "friends/accept_request", locals: {friend_2: @user.id, friend_1: current_user.id} %>
-          <%= render "friends/decline_request", locals: {friend_2: @user.id, friend_1: current_user.id} %>
+          <%= render "friends/accept_request", locals: {friend2: @user.id, friend1: current_user.id} %>
+          <%= render "friends/decline_request", locals: {friend2: @user.id, friend1: current_user.id} %>
         </div>
       </div>
     <% end %>
@@ -35,7 +35,7 @@
 <div id="friends">
   <% @friends.each do |friend| %>
     <div id="<%= dom_id friend %>" class = "friend">
-      <% @user = User.find(second_user(User.find(friend.friend_1), User.find(friend.friend_2)).id)%>
+      <% @user = User.find(second_user(User.find(friend.friend1), User.find(friend.friend2)).id)%>
       <%=%>
       <p>
         <strong><%=t(:nick)%>: </strong>

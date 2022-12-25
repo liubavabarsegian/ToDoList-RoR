@@ -4,13 +4,13 @@
 <%if @user.id != current_user.id%>
         <div id = 'relationship_button'>
         <%if !find_request(current_user, @user).nil?%>
-                <%= render "friends/request_is_sent", locals: {friend_2: @user.id, friend_1: current_user.id}%>
+                <%= render "friends/request_is_sent", locals: {friend2: @user.id, friend1: current_user.id}%>
         <%elsif !find_request(@user, current_user).nil?%>
-                <%= render "friends/accept_request", locals: {friend_2: @user.id, friend_1: current_user.id}%>
+                <%= render "friends/accept_request", locals: {friend2: @user.id, friend1: current_user.id}%>
         <%elsif !find_friend(@user).nil? %>
-                <%= render "friends/destroy_friendship", locals: {friend_2: @user, friend_1: current_user}%>
+                <%= render "friends/destroy_friendship", locals: {friend2: @user, friend1: current_user}%>
         <% else %>
-                <%= render "friends/add_as_friend", locals: {friend_2: @user.id, friend_1: current_user.id}%>
+                <%= render "friends/add_as_friend", locals: {friend2: @user.id, friend1: current_user.id}%>
         <%end%>
         </div>
 <%end%>
