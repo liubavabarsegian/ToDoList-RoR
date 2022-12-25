@@ -1,56 +1,56 @@
 
 <div id="<%= dom_id user %>" >
   <% if user_signed_in? && current_user.id == user.id%>
-    <h1>My account</h1>
+    <h1><%=t(:my_account)%></h1>
     <div style="display:flex;">
-      <%= link_to "Edit my account info", edit_user_path(@user), class:'btn btn-primary' %>
-      <%= button_to "Delete my account", @user,  data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'}, class: 'btn btn-danger' %>    
+      <%= link_to t(:edit_my_account), edit_user_path(@user), class:'btn btn-primary' %>
+      <%= button_to t(:delete_my_account), @user,  data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'}, class: 'btn btn-danger' %>    
     </div>
     <p>
-      <strong>Id:</strong>
+      <strong><%=t(:id)%>:</strong>
       <%= user.id %>
     </p>
     <p>
   <%end%>
-      <strong>Nick:</strong>
+      <strong><%=t(:nick)%>:</strong>
       <%= user.nick %>
     </p>
 
     <p>
-      <strong>Name:</strong>
+      <strong><%=t(:name)%>:</strong>
       <%= user.name %>
     </p>
 
     <p>
-      <strong>Surname:</strong>
+      <strong><%=t(:surname)%>:</strong>
       <%= user.surname %>
     </p>
 
     <% if user_signed_in? && current_user.id == user.id%>
     <p>
-      <strong>Email:</strong>
+      <strong><%=t(:email)%>:</strong>
       <%= user.email %>
     </p>
 
     <p>
-      <strong>Password:</strong>
+      <strong><%=t(:password)%>:</strong>
       <%= user.password %>
     </p>
     <%end%>
     <p>
-      <strong>Pending tasks:</strong>
+      <strong><%=t(:pending_tasks)%>:</strong>
       <%=@pending_tasks.count%>
     </p>
     
     <p>
-      <strong>Completed tasks:</strong>
+      <strong><%=t(:completed_tasks)%>:</strong>
       <%=@completed_tasks.count%>
     </p>
 
     <%if current_user.id == user.id %>
-      <h1>Your progress this week</h1>
+      <h1><%=t(:your_progress)%></h1>
     <%else%>
-      <h1><%=user.nick%>'s progress this week</h1>
+      <h1><%=user.nick%><%=t(:users_progress)%></h1>
     <%end%>
     
 

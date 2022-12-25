@@ -92,3 +92,20 @@ en:
   this_month: "this_month"
   all: "all the time"
   show: "show"
+
+  hi: "Hi"
+  thanks_for_registration: "Thanks for signing up! For continuing follow the link below"
+  confirm: "Confirm"
+
+  name: "Name"
+  surname: "Surname"
+  password_confirmation: "Password confirmation"
+  edit_my_account: "Edit my account"
+  editing_user: "Editing your account info"
+  delete_my_account: "Delete my account"
+  pending_tasks: "Pending tasks"
+  your_progress: "Your progress this week"
+  users_progress: "'s progress this week"
+
+  users: "Users"
+  show_this_user: "Show this user"

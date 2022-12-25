@@ -1,7 +1,7 @@
-<h1> Привет, <%= @user.nick %>! 👋≧◉ᴥ◉≦ </h1>
+<h1> <%=t(:hi)%>, <%= @user.nick %>! 👋≧◉ᴥ◉≦ </h1>
 
 <p>
-  Спасибо за регистрацию. Чтобы продолжить, перейди по ссылке ниже :)
+  <%=t(:thanks_for_registration)%>
   <br/>
-  <%= link_to 'Подвердить', confirm_email_user_url(@user.confirm_token, email: @user.email) %>
+  <%= link_to t(:confirm), confirm_email_user_url(@user.confirm_token, email: @user.email) %>
 </p>

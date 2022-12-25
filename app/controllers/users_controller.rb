@@ -82,29 +82,7 @@ class UsersController < ApplicationController
     end
   end
 
-  # def choose_color
-  #   redirect_to login_path unless user_signed_in?
 
-  #   @completed_tasks = Task.where(user_id: @user.id, completed: true)
-  #   @colo  # def choose_color
-  #   redirect_to login_path unless user_signed_in?
-
-  #   @completed_tasks = Task.where(user_id: @user.id, completed: true)
-  #   @color = params[:color]
-  #   puts @color
-  #   puts "color"
-  #   respond_to do |format|
-  #     format.html         { render :choose_color } # renders `page.html.erb`
-  #     format.turbo_stream { render :choose_color } # renders `page.turbo_stream.erb`
-  #   end
-  # endr = params[:color]
-  #   puts @color
-  #   puts "color"
-  #   respond_to do |format|
-  #     format.html         { render :choose_color } # renders `page.html.erb`
-  #     format.turbo_stream { render :choose_color } # renders `page.turbo_stream.erb`
-  #   end
-  # end
   def sounds
 
   end

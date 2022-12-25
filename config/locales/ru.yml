@@ -24,7 +24,7 @@ ru:
   find_new_friends: "Найти новых друзей"
   make_friends: "Друзья делают нашу жизнь ярче! Добавьте друзей!"
 
-  todo: "ТуДу"
+  todo: "ТуДуМц"
   calendar: "Календарь"
   my_friends: "Мои друзья"
   competitions: "Соревновалки"
@@ -63,3 +63,21 @@ ru:
   all: "за все время"
   show: "показать"
 
+  hi: "Привет"
+  thanks_for_registration: "Спасибо за регистрацию. Для продолжения перейдите по ссылке"
+  confirm: "Подтвердить"
+
+
+  name: "Имя"
+  surname: "Фамилия"
+  password_confirmation: "Подтверждение пароля"
+  edit_my_account: "Редактировать мой профиль"
+  editing_user: "Редактирование профиля"
+  delete_my_account: "Удалить мой аккаунт"
+  pending_tasks: "Текущие задачи"
+  your_progress: "Ваш прогресс за эту неделю"
+  users_progress: " сделал такой прогресс за неделю"
+
+
+  users: "Пользователи"
+  show_this_user: "Показать профиль этого пользователя"
