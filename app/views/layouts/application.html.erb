@@ -47,6 +47,16 @@
           <%end%>
           <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
             <ul class="navbar-nav mr-auto">
+                <li id = "locals">
+                  <% if I18n.locale == :ru %>
+                    <img src="<%=asset_path('ru.png')%>",  style="height: 30px;">
+                    <%= link_to "RU", { :locale=>'en' }, class: "local" %>
+
+                  <% else %>
+                    <img src="<%=asset_path('eng.png')%>", style="height: 30px;">
+                    <%= link_to "ENG", { :locale=>'ru' } , class: "local"%>
+                  <%end%>
+                </li>
                 <%if user_signed_in?%>
                   <li class="nav-item dropdown mr-auto">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -159,6 +169,8 @@ function dont_show() {
   var dance = document.getElementById('container');
   dance.style.visibility='hidden'
 }
+
+
 
 </script>
 </html>

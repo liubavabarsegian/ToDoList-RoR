@@ -1,5 +1,5 @@
 <%= form_with(url: '/save_sounds', class: "form", method: :get) do |form| %>
-    <h1>Choose sound for task accomplishments </h1>
+    <h1><%=t(:choose_success_sound)%></h1>
     <div id = "succes_radios">
         <%# !!params[:success_sound]  %>
         <%= form.radio_button :success_sound, "si" , onclick:"play('si')" %>
@@ -33,7 +33,7 @@
         <%= form.label :success_sound, "yo", value:  "you" %><br />
         
     </div>
-    <h1>Choose sound for making task uncompleted</h1>
+    <h1><%=t(:choose_failure_sound)%></h1>
     <div id = "failure_radios">
         <%# !!params[:success_sound]  %>
         <%= form.radio_button :failure_sound, "ddd" , onclick:"play('ddd')"%>
@@ -65,6 +65,6 @@
         
     </div>
     <div>
-        <%= form.submit "Save sounds", class: "btn btn-success btn-lg"%>
+        <%= form.submit t(:save_sounds), class: "btn btn-success btn-lg"%>
     </div>
 <% end %>

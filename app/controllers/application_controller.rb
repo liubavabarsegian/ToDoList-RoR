@@ -3,16 +3,22 @@
 # class of controller
 class ApplicationController < ActionController::Base
   include ApplicationHelper
-  
-  class ApplicationController < ActionController::Base
-    around_action :switch_locale
-    def switch_locale(&action)
-      locale = params[:locale] || I18n.default_locale
-      I18n.with_locale(locale, &action)
-    end
+
+  around_action :switch_locale
+  before_action :set_locale
+
+  def set_locale
+    I18n.locale = app_params[:locale] || I18n.default_locale
   end
 
+  protect_from_forgery
+
+  def switch_locale(&action)
+    locale = params[:locale] || I18n.default_locale
+    I18n.with_locale(locale, &action)
+  end
   private
+
 
   def current_user
     @current_user || User.find_by(id: session[:user_id]) if session[:user_id].present?
@@ -33,6 +39,10 @@ class ApplicationController < ActionController::Base
     return unless user_signed_in?
 
     flash[:warning] = 'You are already logged in'
+  end
+
+  def app_params
+    params.permit(:locale)
   end
 
   helper_method :current_user, :user_signed_in?

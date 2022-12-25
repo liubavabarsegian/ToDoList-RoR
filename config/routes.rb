@@ -1,4 +1,4 @@
-Rails.application.routes.draw do 
+Rails.application.routes.draw do
   resources :tasks
   resource :session, only: %i[new create destroy]
   resources :sessions, only: %i[new create show]

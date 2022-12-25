@@ -109,3 +109,6 @@ en:
 
   users: "Users"
   show_this_user: "Show this user"
+  choose_success_sound: "Choose sound for task accomplishment"
+  choose_failure_sound: "Choose sound for making task uncompleted"
+  save_sounds: "Save sounds"
