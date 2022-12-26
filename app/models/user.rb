@@ -1,16 +1,16 @@
 # frozen_string_literal: true
 
+# user
 class User < ApplicationRecord
   has_secure_password
-  # has_many: :friends
 
-  validates_uniqueness_of :nick, message: 'already exists'
-  validates_uniqueness_of :email, message: 'already exists'
+  validates_uniqueness_of :nick, message: I18n.t(:already_exists)
+  validates_uniqueness_of :email, message: I18n.t(:already_exists)
 
-  validates :email, presence: true, format: { with: URI::MailTo::EMAIL_REGEXP }
-  validates :nick, presence: true
-  validates :password_digest, presence: true
-  validates :password_confirmation, presence: true # if new?
+  validates_presence_of :nick, message: I18n.t(:cannot_be_blank)
+  validates_presence_of :email, message: I18n.t(:cannot_be_blank), format: {with: URI::MailTo::EMAIL_REGEXP}
+  validates_presence_of :password, message: I18n.t(:cannot_be_blank)
+  validates_presence_of :password_confirmation, message: I18n.t(:cannot_be_blank)
 
   before_create :confirmation_token
 
@@ -20,11 +20,13 @@ class User < ApplicationRecord
     save!(validate: false)
   end
 
+  # rubocop:disable Naming/PredicateName
   def is_friend?(user)
-    !Friend.where(friend_1: id,
-                  friend_2: user.id).or(Friend.where(friend_1: user.id,
-                                                     friend_2: id)).where(relationship: 'friendship').empty?
+    !Friend.where(friend1: id,
+                  friend2: user.id).or(Friend.where(friend1: user.id,
+                                                    friend2: id)).where(relationship: 'friendship').empty?
   end
+  # rubocop:enable Naming/PredicateName
 
   private
 

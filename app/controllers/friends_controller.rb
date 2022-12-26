@@ -11,6 +11,7 @@ class FriendsController < ApplicationController
     @friends = friends
   end
 
+  # rubocop:disable Metrics/AbcSize
   def send_request
     @requests = requests
     @friend1 = User.find(friend_params[:friend1])
@@ -22,6 +23,7 @@ class FriendsController < ApplicationController
     @possible_friend.update_attribute(:relationship, 'request')
     @possible_friend.update_attribute(:who_sent_request, @friend1.id)
   end
+  # rubocop:enable Metrics/AbcSize
 
   def cancell_request
     @requests = requests

@@ -2,6 +2,28 @@
 
 require 'rails_helper'
 
-RSpec.describe ConfirmationMailer, type: :mailer do
-  pending "add some examples to (or delete) #{__FILE__}"
+RSpec.describe UserMailer, type: :mailer do
+    describe 'confirmation' do
+        let!(:user_info) do
+          {id:1234, nick: "test", email: "lyubahemmo@mail.ru", password: "1234", password_confirmation: "12345" }
+        end
+        let!(:user) { User.create(user_info) }
+    
+        let(:mail) { UserMailer.with(user:).confirm_email_user_path }
+    
+        it 'checks email subject' do
+          expect(mail.subject).to eq('Email confirmation')
+        end
+
+        it "checks user's email" do
+            expect(mail.to).to eq(user[:email])
+          end
+    
+        it "check's senders email" do
+        expect(mail.from).to eq([ENV['TODO_APP_GMAIL']])
+        end
+        it "check's emailbody" do
+          expect(mail.body.encoded).not_to be_empty
+        end
+      end
 end

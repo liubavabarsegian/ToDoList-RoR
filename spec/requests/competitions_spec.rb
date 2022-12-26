@@ -5,14 +5,14 @@ require 'rails_helper'
 RSpec.describe 'Competitions', type: :request do
   describe 'GET /friends' do
     it 'returns http success' do
-      get '/competitions/friends'
-      expect(response).to have_http_status(:success)
+      get '/friends_competitions'
+      expect(response).to have_http_status(:found)
     end
   end
 
   describe 'GET /all_users' do
     it 'returns http success' do
-      get '/competitions/all_users'
+      get '/all_competitions'
       expect(response).to have_http_status(:success)
     end
   end

@@ -12,13 +12,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 20_221_222_230_647) do
+ActiveRecord::Schema[7.0].define(version: 20_221_226_112_056) do
   # These are extensions that must be enabled in order to support this database
   enable_extension 'plpgsql'
 
   create_table 'friends', force: :cascade do |t|
-    t.integer 'friend_1', null: false
-    t.integer 'friend_2', null: false
+    t.integer 'friend1', null: false
+    t.integer 'friend2', null: false
     t.string 'relationship'
     t.integer 'who_sent_request'
     t.datetime 'created_at', null: false

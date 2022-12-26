@@ -15,7 +15,7 @@ module Todolist
     config.time_zone = 'Moscow'
     config.assets.precompile << 'audios/*'
     I18n.available_locales = %i[ru en]
-    I18n.default_locale = :eng
+    I18n.default_locale = :en
 
     # Configuration for the application, engines, and railties goes here.
     #

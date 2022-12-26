@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
+# friend
 class Friend < ApplicationRecord
-  # belongs_to :user
-
-  validates :friend_1, :friend_2, presence: true
+  validates_presence_of :friend1, :friend2, message: I18n.t(:cannot_be_blank)
 end

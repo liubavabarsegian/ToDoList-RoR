@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
+# users helper
 module UsersHelper
+  # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
   def confirm_email
     user = User.find_by_confirm_token(params[:id])
     if user
@@ -15,4 +17,5 @@ module UsersHelper
     end
     nil
   end
+  # rubocop:enable Metrics/AbcSize, Metrics/MethodLength
 end

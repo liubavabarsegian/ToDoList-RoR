@@ -84,3 +84,6 @@ ru:
   choose_success_sound: "Выберите звук для выполнения задачи"
   choose_failure_sound: "Выберите звук для отмены выполнения задачи"
   save_sounds: "Сохранить звуки"
+
+  already_exists: "уже существует"
+  cannot_be_blank: "не может быть пустым"

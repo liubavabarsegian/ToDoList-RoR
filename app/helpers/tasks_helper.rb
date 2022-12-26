@@ -1,10 +1,5 @@
 # frozen_string_literal: true
 
+# tasks helper
 module TasksHelper
-  # def change_task_status()
-
-  #     if ()
-
-  #     end
-  # end
 end

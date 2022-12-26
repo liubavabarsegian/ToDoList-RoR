@@ -30,6 +30,7 @@ class TasksController < ApplicationController
   def edit; end
 
   # POST /tasks or /tasks.json
+  # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
   def create
     redirect_to login_path unless user_signed_in?
     return unless user_signed_in?
@@ -42,13 +43,14 @@ class TasksController < ApplicationController
     respond_to do |format|
       if @task.save
         format.html { redirect_to root_path, notice: 'Task was successfully created.' }
-        # format.json { render :show, status: :created, location: @task }
+        format.json { render :show, status: :created, location: @task }
       else
         format.html { render :new, status: :unprocessable_entity }
         # format.json { render json: @task.errors, status: :unprocessable_entity }
       end
     end
   end
+  # rubocop:enable Metrics/AbcSize, Metrics/MethodLength
 
   # PATCH/PUT /tasks/1 or /tasks/1.json
   def update
@@ -75,10 +77,10 @@ class TasksController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to tasks_url, notice: 'Task was successfully destroyed.' }
-      # format.json { head :no_content }
     end
   end
 
+  # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
   def complete
     redirect_to login_path unless user_signed_in?
     return unless user_signed_in?
@@ -94,7 +96,9 @@ class TasksController < ApplicationController
       format.turbo_stream { render :complete } # renders `page.turbo_stream.erb`
     end
   end
+  # rubocop:enable Metrics/MethodLength, Metrics/AbcSize
 
+  # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
   def uncomplete
     redirect_to login_path unless user_signed_in?
     return unless user_signed_in?
@@ -110,6 +114,7 @@ class TasksController < ApplicationController
       format.turbo_stream { render :uncomplete } # renders `page.turbo_stream.erb`
     end
   end
+  # rubocop:enable Metrics/MethodLength, Metrics/AbcSize
 
   def choose
     @tasks = Task.all.where(user_id: current_user.id)
