@@ -6,5 +6,4 @@ class UserMailer < ApplicationMailer
     @user = user
     mail to: @user.email, subject: 'Email confirmation'
   end
-
 end

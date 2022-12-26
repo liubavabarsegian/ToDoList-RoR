@@ -8,7 +8,7 @@ class TasksController < ApplicationController
   def index
     redirect_to login_path unless user_signed_in?
     return unless user_signed_in?
-  
+
     @tasks = Task.all
     @option = 'today'
     @tasks = Task.all.where(user_id: current_user.id)

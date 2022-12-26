@@ -23,15 +23,15 @@ RSpec.describe 'tasks', type: :feature do
     expect(page).to have_text('Log in please')
   end
 
-#   scenario 'not autorized to friends' do
-#     visit friends_path
-#     expect(page).to have_text('Log in please')
-#   end
+  #   scenario 'not autorized to friends' do
+  #     visit friends_path
+  #     expect(page).to have_text('Log in please')
+  #   end
 
-#   scenario 'not autorized to my account' do
-#     visit edit_user_account
-#     expect(page).to have_text('Log in please')
-#   end
+  #   scenario 'not autorized to my account' do
+  #     visit edit_user_account
+  #     expect(page).to have_text('Log in please')
+  #   end
 
   scenario 'not autorized to friends' do
     visit 'tasks/new'

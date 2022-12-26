@@ -8,7 +8,7 @@ class User < ApplicationRecord
   validates_uniqueness_of :email, message: I18n.t(:already_exists)
 
   validates_presence_of :nick, message: I18n.t(:cannot_be_blank)
-  validates_presence_of :email, message: I18n.t(:cannot_be_blank), format: {with: URI::MailTo::EMAIL_REGEXP}
+  validates_presence_of :email, message: I18n.t(:cannot_be_blank), format: { with: URI::MailTo::EMAIL_REGEXP }
   validates_presence_of :password, message: I18n.t(:cannot_be_blank)
   validates_presence_of :password_confirmation, message: I18n.t(:cannot_be_blank)
 
