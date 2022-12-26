@@ -37,7 +37,7 @@ class UsersController < ApplicationController
       flash[:error] = @user.errors.full_messages.join('! ')
       redirect_to new_path
     else
-      UserMailer.registration_confirmation(@user).deliver
+      UserMailer.registration_confirmation(@user).deliver_later
       flash[:success] = 'На указанную почту выслано письмо. Подтвердите почту, пожалуйста.'
       redirect_to root_path
     end
@@ -70,7 +70,6 @@ class UsersController < ApplicationController
   def sounds; end
 
   def save_sounds
-    puts 'aloha'
     @user = User.find(current_user.id)
     params.permit(:success_sound, :failure_sound)
     @user.update_attribute(:success_sound, params[:success_sound])

@@ -12,6 +12,7 @@ class CompetitionsController < ApplicationController
   end
 
   def all_users
+    redirect_to login_path unless user_signed_in?
     @completed_tasks = Task.where(completed: true).group(:user_id)
   end
 end

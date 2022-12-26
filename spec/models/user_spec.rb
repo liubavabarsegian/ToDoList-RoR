@@ -23,13 +23,13 @@ RSpec.describe User, type: :model do
 
   describe 'validations of uniquenes' do
     let!(:unique) do
-      { nick: "test", email: "test@test", password: "1234", password_confirmation: "1234"}
+      { nick: "aaa", email: "test@aaa", password: "1234", password_confirmation: "1234"}
     end
     let!(:nick_repeated) do
-      { nick: "test", email: "test2@test", password: "1234", password_confirmation: "1234"}
+      { nick: "aaa", email: "test2@test", password: "1234", password_confirmation: "1234"}
     end
     let!(:email_repeated) do
-      { nick: "test2", email: "test@test", password: "1234", password_confirmation: "1234"}
+      { nick: "test2", email: "test@aaa", password: "1234", password_confirmation: "1234"}
     end
     let!(:first_user) { User.create(unique) }
     let!(:second_user) { User.new(nick_repeated) }

@@ -1,5 +1,5 @@
 
-<%=link_to t(:month_calendar), week_path, type: "button", class: 'btn btn-primary'%>
+<%=link_to t(:month_calendar), week_path, type: "button", class: 'btn btn-primary', id: 'month-calendar'%>
 
 
 <%= month_calendar(events: @tasks) do |date, task| %>

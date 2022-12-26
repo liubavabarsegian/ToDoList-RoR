@@ -5,18 +5,18 @@ require 'rails_helper'
 RSpec.describe UserMailer, type: :mailer do
     describe 'confirmation' do
         let!(:user_info) do
-          {id:1234, nick: "test", email: "lyubahemmo@mail.ru", password: "1234", password_confirmation: "12345" }
+            { nick: "new", email: "lyubahemmo@gmail.com", password: "1234", password_confirmation: "1234"}
         end
         let!(:user) { User.create(user_info) }
     
-        let(:mail) { UserMailer.with(user:).confirm_email_user_path }
+        let!(:mail) { UserMailer.with(user:).registration_confirmation(user) }
     
         it 'checks email subject' do
-          expect(mail.subject).to eq('Email confirmation')
+            expect(mail.subject).to eq('Email confirmation')
         end
 
         it "checks user's email" do
-            expect(mail.to).to eq(user[:email])
+            expect(mail.to).to eq([user[:email]])
           end
     
         it "check's senders email" do

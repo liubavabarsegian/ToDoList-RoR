@@ -13,6 +13,7 @@ class FriendsController < ApplicationController
 
   # rubocop:disable Metrics/AbcSize
   def send_request
+
     @requests = requests
     @friend1 = User.find(friend_params[:friend1])
     @friend2 = User.find(friend_params[:friend2])

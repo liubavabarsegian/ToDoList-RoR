@@ -39,7 +39,7 @@ en:
   all_users_competitions: "Here you can see other users' progress and compare with yours"
   compete_with_friends_button: "Show friends only"
   all_friends_competitions: "Here you can see your friends' progress and compare with yours"
-  compete_with_all_friends_button: "Show all users"
+  compete_with_all_users_button: "Show all users"
 
   accept_friendship_button: "Accept friendship"
   add_as_friend_button: "Add as friend"

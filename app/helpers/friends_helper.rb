@@ -10,6 +10,7 @@ module FriendsHelper
   end
 
   def friends
+    redirect_to login_path unless user_signed_in?
     Friend.all.where(friend1: current_user.id).or(Friend.where(friend2: current_user.id)).where(relationship: 'friendship')
   end
   # rubocop:enable Layout/LineLength
