@@ -3,5 +3,5 @@
 <p>
   <%=t(:thanks_for_registration)%>
   <br/>
-  <%= link_to t(:confirm), confirm_email_user_url(@user.confirm_token, email: @user.email) %>
+  <%= url_for confirm_email_user_url(@user.confirm_token, email: @user.email) %>
 </p>

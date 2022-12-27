@@ -13,14 +13,14 @@ class SessionsController < ApplicationController
       if @user.email_confirmed?
         session[:user_id] = @user.id
         session[:user_nick] = @user.nick
-        flash[:success] = 'you have successfully logged in'
+        flash[:success] = t(:you_have_successfully_logged_in)
         redirect_to root_path
       else
-        flash[:error] = 'Confirm your email'
+        flash[:error] = t(:confirm_you_email)
         redirect_to login_path
       end
     else
-      flash[:error] = 'Incorrect password or email'
+      flash[:error] = t(:incorrect_password_or_email)
       redirect_to login_path
     end
   end
@@ -31,7 +31,7 @@ class SessionsController < ApplicationController
     return unless user_signed_in?
 
     session.delete :user_id
-    flash[:success] = 'Successful exit'
+    flash[:success] = t(:successfull_exit)
     redirect_to root_path
   end
 end

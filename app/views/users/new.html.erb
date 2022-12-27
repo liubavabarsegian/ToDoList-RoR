@@ -1,5 +1,5 @@
 
-<h1>New user</h1>
+<h1><%=t(:new_user)%></h1>
 
 <%= form_with(model: @user, class: "form") do |form| %>
   <% if @user.errors.any? %>
@@ -15,31 +15,31 @@
   <% end %>
 
   <div>
-    <%= form.label :nick, style: "display: block" %>
+    <%= form.label t(:nick), style: "display: block" %>
     <%= form.text_field :nick, id: "su-nick", class: "form-control" %>
   </div>
 
   <div>
-    <%= form.label :name, style: "display: block" %>
+    <%= form.label t(:name), style: "display: block" %>
     <%= form.text_field :name, id: "su-name", class: "form-control" %>
   </div>
 
   <div>
-    <%= form.label :surname, style: "display: block" %>
+    <%= form.label t(:surname), style: "display: block" %>
     <%= form.text_field :surname, id: "su-surname", class: "form-control" %>
   </div>
 
   <div>
-    <%= form.label :email, style: "display: block" %>
+    <%= form.label t(:email), style: "display: block" %>
     <%= form.text_field :email, id: "su-email", class: "form-control", type: "email" %>
   </div>
 
   <div>
-    <%= form.label :password, style: "display: block" %>
+    <%= form.label t(:password), style: "display: block" %>
     <%= form.text_field :password, id: "su-password", type: "password", class: "form-control" %>
   </div>
   <div>
-    <%= form.label :password_confirmation, style: "display: block" %>
+    <%= form.label t(:password_confirmation), style: "display: block" %>
     <%= form.text_field :password_confirmation, id: "su-password-conf", type: "password", class: "form-control" %>
   </div> 
   <div>

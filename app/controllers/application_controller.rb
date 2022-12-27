@@ -5,20 +5,23 @@ class ApplicationController < ActionController::Base
   include ApplicationHelper
 
   around_action :switch_locale
-  before_action :set_locale
-
-  def set_locale
-    I18n.locale = app_params[:locale] || I18n.default_locale
-  end
-
-  protect_from_forgery
-
-  def switch_locale(&action)
-    locale = params[:locale] || I18n.default_locale
-    I18n.with_locale(locale, &action)
-  end
 
   private
+  
+  def switch_locale(&action)
+    locale = checked_locale || I18n.default_locale
+    I18n.with_locale locale, &action
+  end
+
+  def checked_locale
+    locale = params[:locale]
+  
+    return locale if I18n.available_locales.map(&:to_s).include?(locale)
+  end
+
+  def default_url_options
+    { locale: I18n.locale }
+  end
 
   def current_user
     @current_user || User.find_by(id: session[:user_id]) if session[:user_id].present?
@@ -31,14 +34,14 @@ class ApplicationController < ActionController::Base
   def autorize
     return if user_signed_in?
 
-    flash[:warning] = 'You are not logged in'
+    flash[:warning] = t(:you_are_not_logged_in)
     redirect_to root_path
   end
 
   def no_autorize
     return unless user_signed_in?
 
-    flash[:warning] = 'You are already logged in'
+    flash[:warning] = t(:you_are_logged_in)
   end
 
   def app_params

@@ -14,7 +14,7 @@ RSpec.describe 'users', type: :system do
       fill_in 'su-password-conf', with: '1234'
 
       find('#signup-btn').click
-      expect(page).to have_text('На указанную почту выслано письмо. Подтвердите почту, пожалуйста.')
+      expect(page).to have_text(I18n.t(:email_sent))
     end
   end
 
@@ -28,7 +28,7 @@ RSpec.describe 'users', type: :system do
       fill_in 'li-password', with: user.password
       find('#login-btn').click
 
-      expect(page).to have_text('you have successfully logged in')
+      expect(page).to have_text(I18n.t(:you_have_successfully_logged_in))
 
       # visit 'users/1/edit'
 
