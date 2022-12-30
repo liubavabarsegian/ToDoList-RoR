@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
   around_action :switch_locale
 
   private
-  
+
   def switch_locale(&action)
     locale = checked_locale || I18n.default_locale
     I18n.with_locale locale, &action
@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
 
   def checked_locale
     locale = params[:locale]
-  
+
     return locale if I18n.available_locales.map(&:to_s).include?(locale)
   end
 

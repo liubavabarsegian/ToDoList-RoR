@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  scope '(:locale)', locale: /#{I18n.available_locales.join('|')}/ do
+  # scope '(:locale)', locale: /#{I18n.available_locales.join('|')}/ do
   resources :tasks
   resource :session, only: %i[new create destroy]
   resources :sessions, only: %i[new create show]
@@ -36,8 +36,13 @@ Rails.application.routes.draw do
   resources :users do
     member do
       get :confirm_email
-      # get :registration_confirmation
     end
   end
-end
+
+  # resource :user do
+  #   member do
+  #     get :confirm_email
+  #   end
+  # end
+# end
 end
